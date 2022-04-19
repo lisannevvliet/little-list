@@ -31,6 +31,14 @@ io.on('connection', (socket) => {
     console.log(item + " is unchecked (server-side).")
     io.emit("unchecked", item)
   })
+
+  socket.on("typing", () => {
+    io.emit("typing")
+  })
+
+  socket.on("doneTyping", () => {
+    io.emit("doneTyping")
+  })
 })
 
 http.listen(port, () => {
