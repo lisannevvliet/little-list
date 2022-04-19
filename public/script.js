@@ -53,3 +53,16 @@ socket.on("unchecked", item => {
     changedItem.checked = false;
   }
 })
+
+textInput.addEventListener("keypress", function() {
+  setTimeout(function() { socket.emit("doneTyping") }, 3000)
+  socket.emit("typing")
+})
+
+socket.on("typing", () =>
+  document.querySelector("#typing").textContent = "Someone is typing..."
+)
+
+socket.on("doneTyping", () =>
+  document.querySelector("#typing").textContent = ""
+)
