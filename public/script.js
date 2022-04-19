@@ -25,3 +25,23 @@ socket.on('item', item => {
 
   items.scrollTop = items.scrollHeight
 })
+
+document.querySelector("#item").addEventListener("change", event => {
+  if (event.target.checked === true) {
+    // console.log(`${event.target.parentElement.textContent.trim()} is ${event.target.checked}`)
+    socket.emit("checked", event.target.parentElement.textContent.trim())
+  }
+
+  if (event.target.checked === false) {
+    // console.log(`${event.target.parentElement.textContent.trim()} is ${event.target.checked}`)
+    socket.emit("unchecked", event.target.parentElement.textContent.trim())
+  }
+})
+
+socket.on("checked", item => {
+  console.log("Something is checked (client-side).")
+})
+
+socket.on("unchecked", item => {
+  console.log("Something is unchecked (client-side).")
+})
