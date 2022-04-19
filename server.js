@@ -22,12 +22,12 @@ io.on('connection', (socket) => {
   })
 
   socket.on("checked", (item) => {
-    console.log("Something is checked (server-side).")
+    console.log(item + " is checked (server-side).")
     io.emit("checked", item)
   })
 
   socket.on("unchecked", (item) => {
-    console.log("Something is unchecked (server-side).")
+    console.log(item + " is unchecked (server-side).")
     io.emit("unchecked", item)
   })
 })
