@@ -35,6 +35,11 @@ socket.on('item', item => {
 
 socket.on("checked", item => {
   console.log(item +" is checked (client-side).")
+  let changedItem = document.querySelector(`#${item}`)
+
+  if (!changedItem.checked) {
+    changedItem.checked = true;
+  }
 })
 
 socket.on("unchecked", item => {
