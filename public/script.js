@@ -1,6 +1,6 @@
 let socket = io()
 let messages = document.querySelector('section ul')
-let input = document.querySelector('input')
+let textInput = document.querySelector('input[type="text"]')
 
 document.querySelector('form').addEventListener('submit', event => {
   event.preventDefault()
@@ -10,7 +10,7 @@ document.querySelector('form').addEventListener('submit', event => {
   }
 })
 
-socket.on('message', message => {
-  messages.appendChild(Object.assign(document.createElement('li'), { textContent: message }))
-  messages.scrollTop = messages.scrollHeight
+socket.on('message', item => {
+  item.appendChild(Object.assign(document.createElement('li'), { textContent: item }))
+  item.scrollTop = item.scrollHeight
 })
