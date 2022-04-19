@@ -13,8 +13,8 @@ app.use(express.static(path.resolve('public')))
 io.on('connection', (socket) => {
   console.log('a user connected')
 
-  socket.on('message', (item) => {
-    io.emit('message', item)
+  socket.on('item', (item) => {
+    io.emit('item', item)
   })
 
   socket.on('disconnect', () => {

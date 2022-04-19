@@ -1,16 +1,27 @@
 let socket = io()
-let messages = document.querySelector('section ul')
-let textInput = document.querySelector('input[type="text"]')
+let items = document.querySelector('form fieldset')
+let textInput = document.querySelector('input[type="text"')
 
 document.querySelector('form').addEventListener('submit', event => {
   event.preventDefault()
-  if (input.value) {
-    socket.emit('message', input.value)
-    input.value = ''
+  if (textInput.value) {
+    socket.emit('item', textInput.value)
+    textInput.value = ''
   }
 })
 
-socket.on('message', item => {
-  item.appendChild(Object.assign(document.createElement('li'), { textContent: item }))
-  item.scrollTop = item.scrollHeight
+socket.on('item', item => {
+  console.log('test')
+
+
+  items.appendChild(Object.assign(document.createElement('input'), { 
+    id: item,
+    type: "checkbox"
+  }))
+  items.appendChild(Object.assign(document.createElement('label'), { 
+    textContent: item,
+    htmlFor: item
+  }))
+
+  items.scrollTop = items.scrollHeight
 })
