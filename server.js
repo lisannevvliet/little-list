@@ -20,6 +20,16 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('user disconnected')
   })
+
+  socket.on("checked", (item) => {
+    console.log("Something is checked (server-side).")
+    io.emit("checked", item)
+  })
+
+  socket.on("unchecked", (item) => {
+    console.log("Something is unchecked (server-side).")
+    io.emit("unchecked", item)
+  })
 })
 
 http.listen(port, () => {
