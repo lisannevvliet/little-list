@@ -1,6 +1,6 @@
 let socket = io()
 let itemList = document.querySelector('form fieldset')
-let textInput = document.querySelector('input[type="text"')
+let textInput = document.querySelector('input[type="text"]')
 
 document.querySelector('form').addEventListener('submit', event => {
   event.preventDefault()
@@ -22,9 +22,9 @@ socket.on('item', item => {
 
   itemList.scrollTop = itemList.scrollHeight
 
-  //Add eventlistener
+  // Add event listener.
   let createdItem = document.querySelector(`#${item}`)
-  createdItem.addEventListener("change", event => {
+  createdItem.addEventListener("change", _event => {
     if (createdItem.checked) {
       socket.emit("checked", createdItem.id)
     } else {
@@ -34,7 +34,7 @@ socket.on('item', item => {
 })
 
 socket.on("checked", item => {
-  console.log(item +" is checked (client-side).")
+  console.log(item + " is checked (client-side).")
   let changedItem = document.querySelector(`#${item}`)
 
   if (!changedItem.checked) {
@@ -43,7 +43,7 @@ socket.on("checked", item => {
 })
 
 socket.on("unchecked", item => {
-  console.log(item +" is unchecked (client-side).")
+  console.log(item + " is unchecked (client-side).")
   let changedItem = document.querySelector(`#${item}`)
 
   if (changedItem.checked) {
