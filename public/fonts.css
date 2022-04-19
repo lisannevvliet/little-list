@@ -1,0 +1,104 @@
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-Thin.woff2') format('woff2'),
+      url('/fonts/OktaNeue-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-ThinItalic.woff2') format('woff2'),
+      url('/fonts/OktaNeue-ThinItalic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+}
+
+
+
+
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-Light.woff2') format('woff2'),
+      url('/fonts/OktaNeue-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-LightItalic.woff2') format('woff2'),
+      url('/fonts/OktaNeue-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+}
+
+
+
+
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-Regular.woff2') format('woff2'),
+      url('/fonts/OktaNeue-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-RegularItalic.woff2') format('woff2'),
+      url('/fonts/OktaNeue-RegularItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}
+
+
+
+
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-Medium.woff2') format('woff2'),
+      url('/fonts/OktaNeue-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-MediumItalic.woff2') format('woff2'),
+      url('/fonts/OktaNeue-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+}
+
+
+
+
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-Bold.woff2') format('woff2'),
+      url('/fonts/OktaNeue-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-BoldItalic.woff2') format('woff2'),
+      url('/fonts/OktaNeue-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+
+
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-Black.woff2') format('woff2'),
+      url('/fonts/OktaNeue-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Okta Neue';
+  src: url('/fonts/OktaNeue-BlackItalic.woff2') format('woff2'),
+      url('/fonts/OktaNeue-BlackItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+}
