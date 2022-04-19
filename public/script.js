@@ -11,14 +11,17 @@ document.querySelector('form').addEventListener('submit', event => {
 })
 
 socket.on('item', item => {
-  itemList.appendChild(Object.assign(document.createElement('input'), { 
+  let html = document.createElement('li')
+  html.appendChild(Object.assign(document.createElement('input'), { 
     id: item,
     type: "checkbox"
   }))
-  itemList.appendChild(Object.assign(document.createElement('label'), { 
+  html.appendChild(Object.assign(document.createElement('label'), { 
     textContent: item,
     htmlFor: item
   }))
+
+  itemList.appendChild(html)
 
   itemList.scrollTop = itemList.scrollHeight
 
