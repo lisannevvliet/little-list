@@ -3,7 +3,7 @@
         <h1>Choose a nickname</h1>
         <form action="/" method="post">
         {{!-- https://stackoverflow.com/questions/13766015/is-it-possible-to-configure-a-required-field-to-ignore-white-space --}}
-            <input type="text" name="nickname" placeholder="Nickname" pattern="\S(.*\S)?" required>
+            <input type="text" name="nickname" placeholder="Nickname" pattern=".*\S+.*" required>
             <button type="submit">
                 <img src="images/sent.png">
             </button>
