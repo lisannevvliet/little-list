@@ -16,14 +16,22 @@ main {
 }
 
 section {
-    height: 90vh;
     width: 100%;
     background: white;
     border-radius: 25px;
-    display: flex;
-    flex-direction: column;
     padding: 20px;
     margin: 0 auto;
+}
+
+#enrollment input {
+    flex-grow: unset;
+    width: 50%;
+}
+
+#chat {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -50,12 +58,13 @@ li {
 #typing {
     margin-top: 8px;
     margin-bottom: 8px;
-    margin-left: 24px;
+    margin-left: 25px;
 }
 
 form {
     display: flex;
     gap: 10px;
+    justify-content: center;
 }
 
 form input {

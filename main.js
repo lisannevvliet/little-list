@@ -18,6 +18,11 @@ app.use(express.static("static"))
 app.engine("handlebars", handlebars.engine())
 app.set("view engine", "handlebars")
 
+// Parse incoming requests.
+app.use(express.urlencoded({
+  extended: true
+}))
+
 io.on("connection", (socket) => {
   console.log("A user connected.")
 
@@ -47,4 +52,12 @@ server.listen(process.env.PORT, () => {
 app.get("/", (_req, res) => {
   // Load the index page.
   res.render("index")
+})
+
+// Listen to all POST requests on /.
+app.post("/", (req, res) => {
+  // Load the chat page with the nickname.
+  res.render("chat", {
+    nickname: req.body.nickname
+  })
 })
