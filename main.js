@@ -8,7 +8,7 @@ const path = require('path')
 const io = require('socket.io')(http)
 const port = process.env.PORT || 4242
 
-app.use(express.static(path.resolve('public')))
+app.use(express.static(path.resolve('static')))
 
 io.on('connection', (socket) => {
   console.log('a user connected')
