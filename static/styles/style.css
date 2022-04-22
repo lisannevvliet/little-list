@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f7fb;
+    font-family: Akzentica4F, system-ui;
+    width: 90vw;
+    margin: 0 auto;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+section {
+    height: 90vh;
+    width: 100%;
+    background: white;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    overflow: scroll;
+    flex-grow: 1;
+    padding-left: 0;
+    margin: 0;
+}
+
+li {
+    color: white;
+    background: #4d426d;
+    border-radius: 25px 0 25px 25px;
+    padding: 15px 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#typing {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 24px;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+}
+
+form input {
+    font-family: Akzentica4F, system-ui;
+    background: #f5f7fb;
+    border: none;
+    border-radius: 25px;
+    flex-grow: 1;
+    padding: 15px 25px;
+}
+
+form button {
+    height: 50px;
+    width: 50px;
+    background: #3aa68b;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+form button img {
+    height: 20px;
+}
+
+/* Laptop */
+@media only screen and (min-width: 1024px) {
+    body {
+        width: 70vw;
+    }
+}
+
+/* Laptop L */
+@media only screen and (min-width: 1440px) {
+    body {
+        width: 50vw;
+    }
+}

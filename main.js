@@ -28,6 +28,14 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("User disconnected.")
   })
+
+  socket.on("typing", () => {
+    io.emit("typing")
+  })
+
+  socket.on("done-typing", () => {
+    io.emit("done-typing")
+  })
 })
 
 // Set and log the port for the HTTP server.

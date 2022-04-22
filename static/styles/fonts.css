@@ -1,0 +1,108 @@
+@font-face {
+    font-family: 'Akzentica4F';
+    src: url('/fonts/Akzentica4F-Bold.woff2') format('woff2'),
+        url('/fonts/Akzentica4F-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akzentica4F';
+    src: url('/fonts/Akzentica4F-BoldItalic.woff2') format('woff2'),
+        url('/fonts/Akzentica4F-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akzentica4F';
+    src: url('/fonts/Akzentica4F-Italic.woff2') format('woff2'),
+        url('/fonts/Akzentica4F-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akzentica4F';
+    src: url('/fonts/Akzentica4F.woff2') format('woff2'),
+        url('/fonts/Akzentica4F.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akzentica4FSemiBold';
+    src: url('/fonts/Akzentica4FSemiBold.woff2') format('woff2'),
+        url('/fonts/Akzentica4FSemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akzentica4FExtraBold';
+    src: url('/fonts/Akzentica4FExtraBold.woff2') format('woff2'),
+        url('/fonts/Akzentica4FExtraBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akzentica4FMedium';
+    src: url('/fonts/Akzentica4FMedium-Italic.woff2') format('woff2'),
+        url('/fonts/Akzentica4FMedium-Italic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akzentica4FLight';
+    src: url('/fonts/Akzentica4FLight-Italic.woff2') format('woff2'),
+        url('/fonts/Akzentica4FLight-Italic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akzentica4FExtraBold';
+    src: url('/fonts/Akzentica4FExtraBold-Italic.woff2') format('woff2'),
+        url('/fonts/Akzentica4FExtraBold-Italic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akzentica4FLight';
+    src: url('/fonts/Akzentica4FLight.woff2') format('woff2'),
+        url('/fonts/Akzentica4FLight.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akzentica4FSemiBold';
+    src: url('/fonts/Akzentica4FSemiBold-Italic.woff2') format('woff2'),
+        url('/fonts/Akzentica4FSemiBold-Italic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Akzentica4FMedium';
+    src: url('/fonts/Akzentica4FMedium.woff2') format('woff2'),
+        url('/fonts/Akzentica4FMedium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
