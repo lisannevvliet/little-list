@@ -4,7 +4,8 @@
         <ul></ul>
         <p id="typing"></p>
         <form>
-            <input type="text" autocomplete="off" placeholder="Type a message">
+            {{!-- https://stackoverflow.com/questions/13766015/is-it-possible-to-configure-a-required-field-to-ignore-white-space --}}
+            <input type="text" autocomplete="off" placeholder="Type a message" pattern="\S(.*\S)?" required>
             <button type="submit">
                 <img src="images/sent.png">
             </button>

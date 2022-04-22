@@ -1,29 +1,48 @@
+function $(element) {
+  // Return the Element object of the corresponding element.
+  return document.querySelector(element)
+}
+
+// Initialise Socket.IO.
 let socket = io()
-let messages = document.querySelector('section ul')
-let input = document.querySelector('#chat input')
 
-document.querySelector('#chat form').addEventListener('submit', event => {
+$("#chat form").addEventListener("submit", event => {
+  // Prevent the page from reloading.
   event.preventDefault()
-  if (input.value) {
-    socket.emit('message', input.value)
-    input.value = ''
-  }
+
+  // Send the message to the socket.
+  socket.emit("message", $("#chat input").value)
+
+  // Clear the input value.
+  $("#chat input").value = ""
 })
 
-socket.on('message', message => {
-  messages.appendChild(Object.assign(document.createElement('li'), { textContent: message }))
-  messages.scrollTop = messages.scrollHeight
+socket.on("message", message => {
+  // Add the incoming message to the list.
+  $("ul").appendChild(Object.assign(document.createElement('li'), {
+    textContent: message
+  }))
+
+  // Scroll to the bottom of the list.
+  $("ul").scrollTop = $("ul").scrollHeight
 })
 
-document.querySelector('#chat form').addEventListener("keypress", function() {
-  setTimeout(function() { socket.emit("done-typing") }, 3000)
+$("#chat form").addEventListener("keypress", function() {
+  // Tell the socket that the user has stopped typing after 3 seconds.
+  setTimeout(function() {
+    socket.emit("done-typing")
+  }, 3000)
+
+  // Tell the socket that the user is typing.
   socket.emit("typing")
 })
 
 socket.on("typing", () =>
-  document.querySelector("#typing").textContent = "Someone is typing..."
+  // Fill the typing indicator with text.
+  $("#typing").textContent = "Someone is typing..."
 )
 
 socket.on("done-typing", () =>
-  document.querySelector("#typing").textContent = ""
+  // Empty the typing indicator.
+  $("#typing").textContent = ""
 )
