@@ -26,7 +26,7 @@ app.use(express.urlencoded({
 io.on("connection", (socket) => {
   console.log("A user connected.")
 
-  socket.on("message", (message) => {
+  socket.on("message", message => {
     io.emit("message", message)
   })
 
@@ -34,8 +34,8 @@ io.on("connection", (socket) => {
     console.log("User disconnected.")
   })
 
-  socket.on("typing", () => {
-    io.emit("typing")
+  socket.on("typing", nickname => {
+    io.emit("typing", nickname)
   })
 
   socket.on("done-typing", () => {
