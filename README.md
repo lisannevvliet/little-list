@@ -1,5 +1,15 @@
 # Real-Time Web
 
+## Table of contents
+- [Live demo](#live-demo)
+- [License](#license)
+
+## Live demo
+https://real-time-web-2122.herokuapp.com/
+
+## License
+This project is licensed under the [GPL-3.0 license](https://github.com/lisannevvliet/real-time-web-2122/blob/main/LICENSE).
+
 <!-- Here are some hints for your project! -->
 
 <!-- Start out with a title and a description -->
