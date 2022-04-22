@@ -13,7 +13,10 @@ if ($("#chat")) {
     event.preventDefault()
   
     // Send the message to the socket.
-    socket.emit("message", $("#chat input").value)
+    socket.emit("message", {
+      message: $("#chat input").value,
+      nickname: $("#nickname").textContent
+    })
   
     // Clear the input value.
     $("#chat input").value = ""
@@ -22,7 +25,7 @@ if ($("#chat")) {
   socket.on("message", message => {
     // Add the incoming message to the list.
     $("ul").appendChild(Object.assign(document.createElement('li'), {
-      textContent: message
+      textContent: `${message.message} ${message.nickname}`
     }))
   
     // Scroll to the bottom of the list.

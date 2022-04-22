@@ -27,7 +27,10 @@ io.on("connection", (socket) => {
   console.log("A user connected.")
 
   socket.on("message", message => {
-    io.emit("message", message)
+    io.emit("message", {
+      message: message.message,
+      nickname: message.nickname
+    })
   })
 
   socket.on("disconnect", () => {
