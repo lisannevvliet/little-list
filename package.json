@@ -4,8 +4,8 @@
   "description": "It's a barebone chat app used as an example in a course on realtime web apps.",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodemon main.js",
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,12 @@
   },
   "homepage": "https://github.com/ju5tu5/barebonechat#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.17.1",
+    "express-handlebars": "^6.0.5",
     "socket.io": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
