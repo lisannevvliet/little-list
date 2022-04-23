@@ -52,29 +52,32 @@ ul {
 
 li {
     display: flex;
-    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
-li div {
+li #user {
     display: flex;
     flex-direction: column;
     margin-right: 15px;
 }
 
-li img {
+li #user img {
     height: 50px;
+    width: 50px;
     border-radius: 50%;
     display: inline;
+    margin: 0 auto;
 }
 
-li.self img {
+li.self #user img {
     display: none;
 }
 
-li p {
+li #user p {
     font-weight: bold;
     text-align: center;
-    margin-top: 8px;
+    margin-top: 4px;
     margin-bottom: 0;
 }
 
@@ -82,11 +85,9 @@ li #message {
     color: black;
     background: #f5f7fb;
     border-radius: 0 25px 25px 25px;
-    word-wrap: break-word;
-    padding: 25px;
-    margin-top: 15px;
-    margin-bottom: 15px;
     width: 50%;
+    display: flex;
+    padding: 25px;
 }
 
 li.self #message {
@@ -94,6 +95,25 @@ li.self #message {
     background: #4d426d;
     border-radius: 25px 0 25px 25px;
     margin-left: auto;
+}
+
+li #message p {
+    word-break: break-word;
+    flex-grow: 1;
+    margin: 0;
+}
+
+li #message #time {
+    color: grey;
+    font-size: smaller;
+    word-break: initial;
+    flex-grow: 0;
+    margin-top: auto;
+    margin-left: 10px;
+}
+
+li.self #message #time {
+    color: lightgrey;
 }
 
 #typing {

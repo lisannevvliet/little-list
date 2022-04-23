@@ -3,15 +3,18 @@ function $(element) {
   return document.querySelector(element)
 }
 
-function add(message, name, styling) {
+function add(message, name, time, styling) {
   // Add the message to the list.
   $("ul").appendChild(Object.assign(document.createElement("li"), {
     className: styling,
-    innerHTML: `<div>
+    innerHTML: `<div id="user">
       <img src="images/placeholder.png">
       <p>${name}</p>
     </div>
-    <div id="message">${message}</div>`
+    <div id="message">
+      <p>${message}</p>
+      <p id="time">${time}</p>
+    </div>`
   }))
 
   // Scroll to the bottom of the list.
@@ -32,15 +35,22 @@ if ($("#chat")) {
     
     // Prevent the page from reloading.
     event.preventDefault()
+
+    // Get the current time.
+    const time = new Date().toLocaleTimeString("nl-NL", {
+      hour: "numeric",
+      minute: "numeric"
+    })
   
     // Send the message to the socket.
     socket.emit("message", {
       message: $("#chat input").value,
-      name: $("#name").textContent
+      name: $("#name").textContent,
+      time: time
     })
 
     // Add the message to the list.
-    add($("#chat input").value, "", "self")
+    add($("#chat input").value, "", time, "self")
   
     // Clear the input value.
     $("#chat input").value = ""
@@ -50,7 +60,7 @@ if ($("#chat")) {
     // Check if the message does not come from the user itself.
     if (message.name != $("#name").textContent) {
       // Add the message to the list.
-      add(message.message, message.name, "")
+      add(message.message, message.name, message.time, "")
     }
   })
   

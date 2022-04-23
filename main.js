@@ -29,7 +29,8 @@ io.on("connection", (socket) => {
   socket.on("message", message => {
     io.emit("message", {
       message: message.message,
-      name: message.name
+      name: message.name,
+      time: message.time
     })
   })
 
