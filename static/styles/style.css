@@ -5,22 +5,23 @@
 body {
     background: #f5f7fb;
     font-family: Akzentica4F, system-ui;
-    width: 90vw;
     margin: 0 auto;
-}
-
-main {
-    height: 100vh;
-    display: flex;
-    align-items: center;
 }
 
 section {
-    width: 100%;
+    width: 90%;
     background: white;
     border-radius: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 20px;
     margin: 0 auto;
+}
+
+input {
+    font-size: medium;
 }
 
 #enrollment input {
@@ -29,7 +30,7 @@ section {
 }
 
 #chat {
-    height: 90vh;
+    height: 90%;
     display: flex;
     flex-direction: column;
 }
@@ -91,14 +92,14 @@ form button img {
 
 /* Laptop */
 @media only screen and (min-width: 1024px) {
-    body {
-        width: 70vw;
+    section {
+        width: 70%;
     }
 }
 
 /* Laptop L */
 @media only screen and (min-width: 1440px) {
-    body {
-        width: 50vw;
+    section {
+        width: 50%;
     }
 }
