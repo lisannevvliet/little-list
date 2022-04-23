@@ -9,6 +9,12 @@ let socket = io()
 // Check if the current page is the chat.
 if ($("#chat")) {
   $("#chat form").addEventListener("submit", event => {
+    // Detect if the browser is on a mobile device.
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      // Close the keyboard after submit.
+      document.activeElement.blur()
+    }
+    
     // Prevent the page from reloading.
     event.preventDefault()
   
