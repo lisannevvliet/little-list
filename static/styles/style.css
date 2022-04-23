@@ -86,7 +86,6 @@ li #message {
     background: #f5f7fb;
     border-radius: 0 25px 25px 25px;
     width: 50%;
-    display: flex;
     padding: 25px;
 }
 
@@ -99,17 +98,14 @@ li.self #message {
 
 li #message p {
     word-break: break-word;
-    flex-grow: 1;
+    display: inline;
     margin: 0;
 }
 
 li #message #time {
     color: grey;
     font-size: smaller;
-    word-break: initial;
-    flex-grow: 0;
-    margin-top: auto;
-    margin-left: 10px;
+    float: right;
 }
 
 li.self #message #time {
