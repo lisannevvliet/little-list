@@ -29,7 +29,7 @@ io.on("connection", (socket) => {
   socket.on("message", message => {
     io.emit("message", {
       message: message.message,
-      nickname: message.nickname
+      name: message.name
     })
   })
 
@@ -37,8 +37,8 @@ io.on("connection", (socket) => {
     console.log("User disconnected.")
   })
 
-  socket.on("typing", nickname => {
-    io.emit("typing", nickname)
+  socket.on("typing", name => {
+    io.emit("typing", name)
   })
 
   socket.on("done-typing", () => {
@@ -59,8 +59,9 @@ app.get("/", (_req, res) => {
 
 // Listen to all POST requests on /.
 app.post("/", (req, res) => {
-  // Load the chat page with the nickname.
+  // Load the chat page with the name and whether it ends with an "s".
   res.render("chat", {
-    nickname: req.body.nickname
+    name: req.body.name,
+    s: !(req.body.name.endsWith("s") || req.body.name.endsWith("S"))
   })
 })

@@ -3,13 +3,13 @@ function $(element) {
   return document.querySelector(element)
 }
 
-function add(message, nickname, name) {
+function add(message, name, styling) {
   // Add the message to the list.
   $("ul").appendChild(Object.assign(document.createElement("li"), {
-    className: name,
+    className: styling,
     innerHTML: `<div>
       <img src="images/placeholder.png">
-      <p>${nickname}</p>
+      <p>${name}</p>
     </div>
     <div id="message">${message}</div>`
   }))
@@ -36,7 +36,7 @@ if ($("#chat")) {
     // Send the message to the socket.
     socket.emit("message", {
       message: $("#chat input").value,
-      nickname: $("#nickname").textContent
+      name: $("#name").textContent
     })
 
     // Add the message to the list.
@@ -48,9 +48,9 @@ if ($("#chat")) {
   
   socket.on("message", message => {
     // Check if the message does not come from the user itself.
-    if (message.nickname != $("#nickname").textContent) {
+    if (message.name != $("#name").textContent) {
       // Add the message to the list.
-      add(message.message, message.nickname, "")
+      add(message.message, message.name, "")
     }
   })
   
@@ -61,14 +61,14 @@ if ($("#chat")) {
     }, 3000)
   
     // Tell the socket that the user is typing.
-    socket.emit("typing", $("#nickname").textContent)
+    socket.emit("typing", $("#name").textContent)
   })
   
-  socket.on("typing", nickname => {
+  socket.on("typing", name => {
     // Check if the user itself is not the one typing.
-    if (nickname != $("#nickname").textContent) {
+    if (name != $("#name").textContent) {
       // Fill the typing indicator with text.
-      $("#typing").textContent = `${nickname} is typing...`
+      $("#typing").textContent = `${name} is typing...`
     }
   })
   

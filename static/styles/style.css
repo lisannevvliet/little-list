@@ -26,7 +26,7 @@ input {
 
 #enrollment input {
     flex-grow: unset;
-    width: 50%;
+    width: 90%;
 }
 
 #chat {
@@ -135,11 +135,19 @@ form button img {
     section {
         width: 70%;
     }
+
+    #enrollment input {
+        width: 70%;
+    }
 }
 
 /* Laptop L */
 @media only screen and (min-width: 1440px) {
     section {
+        width: 50%;
+    }
+
+    #enrollment input {
         width: 50%;
     }
 }
