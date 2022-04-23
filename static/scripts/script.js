@@ -7,7 +7,11 @@ function add(message, nickname, name) {
   // Add the message to the list.
   $("ul").appendChild(Object.assign(document.createElement("li"), {
     className: name,
-    textContent: message + nickname
+    innerHTML: `<div>
+      <img src="images/placeholder.png">
+      <p>${nickname}</p>
+    </div>
+    <div id="message">${message}</div>`
   }))
 
   // Scroll to the bottom of the list.
@@ -46,7 +50,7 @@ if ($("#chat")) {
     // Check if the message does not come from the user itself.
     if (message.nickname != $("#nickname").textContent) {
       // Add the message to the list.
-      add(message.message, ` - ${message.nickname}`, "")
+      add(message.message, message.nickname, "")
     }
   })
   

@@ -51,6 +51,34 @@ ul {
 }
 
 li {
+    display: flex;
+    align-items: center;
+}
+
+li div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+}
+
+li img {
+    height: 50px;
+    border-radius: 50%;
+    display: inline;
+}
+
+li.self img {
+    display: none;
+}
+
+li p {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+li #message {
     color: black;
     background: #f5f7fb;
     border-radius: 0 25px 25px 25px;
@@ -61,7 +89,7 @@ li {
     width: 50%;
 }
 
-li.self {
+li.self #message {
     color: white;
     background: #4d426d;
     border-radius: 25px 0 25px 25px;
