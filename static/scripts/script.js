@@ -3,6 +3,17 @@ function $(element) {
   return document.querySelector(element)
 }
 
+function add(message, nickname, name) {
+  // Add the message to the list.
+  $("ul").appendChild(Object.assign(document.createElement("li"), {
+    className: name,
+    textContent: message + nickname
+  }))
+
+  // Scroll to the bottom of the list.
+  $("ul").scrollTop = $("ul").scrollHeight
+}
+
 // Initialise Socket.IO.
 let socket = io()
 
@@ -23,19 +34,20 @@ if ($("#chat")) {
       message: $("#chat input").value,
       nickname: $("#nickname").textContent
     })
+
+    // Add the message to the list.
+    add($("#chat input").value, "", "self")
   
     // Clear the input value.
     $("#chat input").value = ""
   })
   
   socket.on("message", message => {
-    // Add the incoming message to the list.
-    $("ul").appendChild(Object.assign(document.createElement('li'), {
-      textContent: `${message.message} ${message.nickname}`
-    }))
-  
-    // Scroll to the bottom of the list.
-    $("ul").scrollTop = $("ul").scrollHeight
+    // Check if the message does not come from the user itself.
+    if (message.nickname != $("#nickname").textContent) {
+      // Add the message to the list.
+      add(message.message, ` - ${message.nickname}`, "")
+    }
   })
   
   $("#chat form").addEventListener("keypress", function() {
@@ -48,10 +60,13 @@ if ($("#chat")) {
     socket.emit("typing", $("#nickname").textContent)
   })
   
-  socket.on("typing", nickname =>
-    // Fill the typing indicator with text.
-    $("#typing").textContent = `${nickname} is typing...`
-  )
+  socket.on("typing", nickname => {
+    // Check if the user itself is not the one typing.
+    if (nickname != $("#nickname").textContent) {
+      // Fill the typing indicator with text.
+      $("#typing").textContent = `${nickname} is typing...`
+    }
+  })
   
   socket.on("done-typing", () =>
     // Empty the typing indicator.
