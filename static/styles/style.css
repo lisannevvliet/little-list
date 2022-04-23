@@ -62,16 +62,20 @@ li #user {
     margin-right: 15px;
 }
 
+li.self #user {
+    display: none;
+}
+
+li.multiple #user {
+    visibility: hidden;
+}
+
 li #user img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
     display: inline;
     margin: 0 auto;
-}
-
-li.self #user img {
-    display: none;
 }
 
 li #user p {

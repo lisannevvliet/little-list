@@ -3,7 +3,21 @@ function $(element) {
   return document.querySelector(element)
 }
 
-function add(message, name, time, styling) {
+// Keep track of who sent the most recent message.
+let last = ""
+
+function add(message, name, time, self) {
+  let styling = ""
+  
+  if (self) {
+    styling = "self"
+  } else {
+    // Stop showing the name and image when someone sends two or more messages in a row.
+    if (last == name) {
+      styling = "multiple"
+    }
+  }
+  
   // Add the message to the list.
   $("ul").appendChild(Object.assign(document.createElement("li"), {
     className: styling,
@@ -19,6 +33,8 @@ function add(message, name, time, styling) {
 
   // Scroll to the bottom of the list.
   $("ul").scrollTop = $("ul").scrollHeight
+
+  last = name
 }
 
 // Initialise Socket.IO.
@@ -50,7 +66,7 @@ if ($("#chat")) {
     })
 
     // Add the message to the list.
-    add($("#chat input").value, "", time, "self")
+    add($("#chat input").value, $("#name").textContent, time, true)
   
     // Clear the input value.
     $("#chat input").value = ""
@@ -60,7 +76,7 @@ if ($("#chat")) {
     // Check if the message does not come from the user itself.
     if (message.name != $("#name").textContent) {
       // Add the message to the list.
-      add(message.message, message.name, message.time, "")
+      add(message.message, message.name, message.time, false)
     }
   })
   
