@@ -69,7 +69,7 @@ h1 {
     color: white;
     font-family: Akzentica4F, system-ui;
     font-weight: bold;
-    background: #3aa68b;
+    background: slateblue;
     transition: background .3s ease-in-out;
     border: none;
     border-radius: 10px;
@@ -85,7 +85,7 @@ h1 {
 }
 
 #trivia #answers button:enabled:hover {
-    background: #35977e;
+    background: #594cac;
     transition: background .3s ease-in-out;
 }
 
