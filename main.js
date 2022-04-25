@@ -49,8 +49,8 @@ io.on("connection", (socket) => {
       data.results[0].question = entities.decodeHTML(data.results[0].question)
 
       // Decode the trivia's incorrect answers.
-      data.results[0].incorrect_answers.forEach(element => 
-        element = entities.decodeHTML(element)
+      data.results[0].incorrect_answers.forEach((element, index) => 
+        data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
       )
 
       // Add an array of randomized answers and decode the trivia's correct answer.
@@ -98,8 +98,8 @@ io.on("connection", (socket) => {
           data.results[0].question = entities.decodeHTML(data.results[0].question)
 
           // Decode the trivia's incorrect answers.
-          data.results[0].incorrect_answers.forEach(element => 
-            element = entities.decodeHTML(element)
+          data.results[0].incorrect_answers.forEach((element, index) => 
+            data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
           )
 
           // Add an array of randomized answers and decode the trivia's correct answer.
