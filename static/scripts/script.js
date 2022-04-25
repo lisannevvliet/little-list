@@ -11,7 +11,7 @@ if ($("#trivia")) {
   let correct
 
   // Listen to clicks on the answer buttons.
-  document.querySelectorAll('#trivia #answers button').forEach(item =>
+  document.querySelectorAll("#trivia #answers button").forEach(item =>
     item.addEventListener("click", event => {
       if (event.target.innerText == correct) {
         // Make the selected button green.
@@ -19,6 +19,13 @@ if ($("#trivia")) {
       } else {
         // Make the selected button red.
         event.target.classList.add("red")
+
+        document.querySelectorAll("#trivia #answers button").forEach(element => {
+          if (element.innerText == correct) {
+            // Make the correct button green.
+            element.classList.add("green")
+          }
+        })
       }
 
       // Disable all buttons.
