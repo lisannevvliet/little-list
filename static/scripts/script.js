@@ -35,7 +35,7 @@ if ($("#trivia")) {
 
   socket.on("connection", length =>
     // Update the amount of players.
-    $("#trivia #connected").innerText = `${length} players`
+    $("#trivia #connected").innerHTML = `<span></span>${length} players`
   )
 
   socket.on("trivia", trivia => {

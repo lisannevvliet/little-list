@@ -59,6 +59,25 @@ h1 {
     flex-direction: column;
 }
 
+#trivia #connected span {
+    height: 10px;
+    width: 10px;
+    background: green;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 1s linear 0s infinite alternate;
+    margin-right: 5px;
+}
+
+@keyframes pulse {
+    from {
+        background: green;
+    }
+    to {
+        background-color: #40a040;
+    }
+}
+
 #trivia #answers {
     display: flex;
     flex-wrap: wrap;
@@ -75,7 +94,7 @@ h1 {
     border-radius: 10px;
     flex: 48%;
     cursor: pointer;
-    padding: 50px 0;
+    padding: 50px 10px;
 }
 
 #trivia #answers button:disabled {
