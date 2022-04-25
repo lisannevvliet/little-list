@@ -8,19 +8,28 @@ if ($("#trivia")) {
   // Initialise Socket.IO.
   let socket = io()
 
+  let correct
+
   // Listen to clicks on the answer buttons.
   document.querySelectorAll('#trivia #answers button').forEach(item =>
     item.addEventListener("click", event => {
-      // Send the answer to the socket.
-      socket.emit("answer", event.target.textContent)
-
-      // Darken the selected button.
-      event.target.classList.add("selected")
+      if (event.target.innerText == correct) {
+        // Make the selected button green.
+        event.target.classList.add("green")
+      } else {
+        // Make the selected button red.
+        event.target.classList.add("red")
+      }
 
       // Disable all buttons.
       document.querySelectorAll("#trivia #answers button").forEach(item =>
         item.disabled = true
       )
+
+      // Send the answer to the socket after half a second.
+      setTimeout(function() {
+        socket.emit("answer", event.target.innerText)
+      }, 500)
     })
   )
 
@@ -34,19 +43,18 @@ if ($("#trivia")) {
     $("#trivia #question").innerText = trivia.question
 
     // Update the trivia's correct answer.
-    $("#trivia #answers #correct").innerText = trivia.correct_answer
+    correct = trivia.correct_answer
 
     document.querySelectorAll("#trivia #answers button").forEach((item, index) => {
-      // Unselect the previously selected button.
-      item.classList.remove("selected")
+      // Remove the result of the previously selected answer.
+      item.classList.remove("green")
+      item.classList.remove("red")
 
       // Enable all buttons.
       item.disabled = false
 
-      // Update the trivia's incorrect answers.
-      if (index > 0) {
-        item.innerText = trivia.incorrect_answers[index - 1 ]
-      }
+      // Update the trivia's answers.
+      item.innerText = trivia.answers[index]
     })
   })
 }

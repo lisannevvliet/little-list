@@ -12,6 +12,8 @@ const io = require("socket.io")(server)
 const handlebars = require("express-handlebars")
 // Import node-fetch.
 const fetch = require("node-fetch")
+// Import entities to decode HTML entities.
+const entities = require("entities")
 
 // Render static files.
 app.use(express.static("static"))
@@ -43,6 +45,19 @@ io.on("connection", (socket) => {
       response.json()
     )
     .then(data => {
+      // Decode the trivia's question.
+      data.results[0].question = entities.decodeHTML(data.results[0].question)
+
+      // Decode the trivia's incorrect answers.
+      data.results[0].incorrect_answers.forEach(element => 
+        element = entities.decodeHTML(element)
+      )
+
+      // Add an array of randomized answers and decode the trivia's correct answer.
+      data.results[0].answers = [entities.decodeHTML(data.results[0].correct_answer)].concat(data.results[0].incorrect_answers).sort(function() {
+        return 0.5 - Math.random()
+      })
+
       // Emit the trivia.
       io.emit("trivia", data.results[0])
 
@@ -79,6 +94,19 @@ io.on("connection", (socket) => {
           response.json()
         )
         .then(data => {
+          // Decode the trivia's question.
+          data.results[0].question = entities.decodeHTML(data.results[0].question)
+
+          // Decode the trivia's incorrect answers.
+          data.results[0].incorrect_answers.forEach(element => 
+            element = entities.decodeHTML(element)
+          )
+
+          // Add an array of randomized answers and decode the trivia's correct answer.
+          data.results[0].answers = [entities.decodeHTML(data.results[0].correct_answer)].concat(data.results[0].incorrect_answers).sort(function() {
+            return 0.5 - Math.random()
+          })
+
           io.emit("trivia", data.results[0])
 
           // Save the most recent trivia.

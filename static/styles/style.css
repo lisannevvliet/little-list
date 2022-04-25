@@ -84,8 +84,18 @@ h1 {
     cursor: auto;
 }
 
-#trivia #answers button:enabled:hover, #trivia #answers button.selected {
+#trivia #answers button:enabled:hover {
     background: #35977e;
+    transition: background .3s ease-in-out;
+}
+
+#trivia #answers button.green {
+    background: green;
+    transition: background .3s ease-in-out;
+}
+
+#trivia #answers button.red {
+    background: red;
     transition: background .3s ease-in-out;
 }
 
