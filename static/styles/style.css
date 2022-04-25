@@ -4,7 +4,7 @@
 
 body {
     background: #f5f7fb;
-    font-family: Akzentica4F, system-ui;
+    font-family: Roboto, system-ui;
     margin: 0 auto;
 }
 
@@ -31,7 +31,7 @@ h1 {
 }
 
 #enrollment form input {
-    font-family: Akzentica4F, system-ui;
+    font-family: Roboto, system-ui;
     font-size: medium;
     background: #f5f7fb;
     border: none;
@@ -67,7 +67,7 @@ h1 {
 
 #trivia #answers button {
     color: white;
-    font-family: Akzentica4F, system-ui;
+    font-family: Roboto, system-ui;
     font-weight: bold;
     background: slateblue;
     transition: background .3s ease-in-out;
