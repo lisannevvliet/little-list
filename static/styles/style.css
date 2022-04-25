@@ -20,124 +20,27 @@ section {
     margin: 0 auto;
 }
 
-input {
-    font-size: medium;
-}
-
-#enrollment input {
-    flex-grow: unset;
-    width: 90%;
-}
-
-#chat {
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-}
-
 h1 {
     text-align: center;
 }
 
-#spacing {
-    flex-grow: 1;
-}
-
-ul {
-    list-style-type: none;
-    overflow: scroll;
-    padding-left: 0;
-    margin: 0;
-}
-
-li {
-    display: flex;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-li #user {
-    display: flex;
-    flex-direction: column;
-    margin-right: 15px;
-}
-
-li.self #user {
-    display: none;
-}
-
-li.multiple #user {
-    visibility: hidden;
-}
-
-li #user img {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    display: inline;
-    margin: 0 auto;
-}
-
-li #user p {
-    font-weight: bold;
-    text-align: center;
-    margin-top: 4px;
-    margin-bottom: 0;
-}
-
-li #message {
-    color: black;
-    background: #f5f7fb;
-    border-radius: 0 25px 25px 25px;
-    width: 50%;
-    padding: 25px;
-}
-
-li.self #message {
-    color: white;
-    background: #4d426d;
-    border-radius: 25px 0 25px 25px;
-    margin-left: auto;
-}
-
-li #message p {
-    word-break: break-word;
-    display: inline;
-    margin: 0;
-}
-
-li #message #time {
-    color: grey;
-    font-size: smaller;
-    float: right;
-}
-
-li.self #message #time {
-    color: lightgrey;
-}
-
-#typing {
-    margin-top: 8px;
-    margin-bottom: 8px;
-    margin-left: 25px;
-}
-
-form {
+#enrollment form {
     display: flex;
     gap: 10px;
     justify-content: center;
 }
 
-form input {
+#enrollment form input {
     font-family: Akzentica4F, system-ui;
+    font-size: medium;
     background: #f5f7fb;
     border: none;
     border-radius: 25px;
-    flex-grow: 1;
+    width: 90%;
     padding: 15px 25px;
 }
 
-form button {
+#enrollment form button {
     height: 50px;
     width: 50px;
     background: #3aa68b;
@@ -146,8 +49,44 @@ form button {
     cursor: pointer;
 }
 
-form button img {
+#enrollment form button img {
     height: 20px;
+}
+
+#trivia {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+#trivia #answers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#trivia #answers button {
+    color: white;
+    font-family: Akzentica4F, system-ui;
+    font-weight: bold;
+    background: #3aa68b;
+    transition: background .3s ease-in-out;
+    border: none;
+    border-radius: 10px;
+    flex: 48%;
+    cursor: pointer;
+    padding: 50px 0;
+}
+
+#trivia #answers button:disabled {
+    background: grey;
+    transition: background .3s ease-in-out;
+    cursor: auto;
+}
+
+#trivia #answers button:enabled:hover, #trivia #answers button.selected {
+    background: #35977e;
+    transition: background .3s ease-in-out;
 }
 
 /* Laptop */

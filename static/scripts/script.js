@@ -3,103 +3,50 @@ function $(element) {
   return document.querySelector(element)
 }
 
-// Keep track of who sent the most recent message.
-let last = ""
+// Check if the current page is the trivia.
+if ($("#trivia")) {
+  // Initialise Socket.IO.
+  let socket = io()
 
-function add(message, name, time, self) {
-  let styling = ""
-  
-  if (self) {
-    styling = "self"
-  } else {
-    // Stop showing the name and image when someone sends two or more messages in a row.
-    if (last == name) {
-      styling = "multiple"
-    }
-  }
-  
-  // Add the message to the list.
-  $("ul").appendChild(Object.assign(document.createElement("li"), {
-    className: styling,
-    innerHTML: `<div id="user">
-      <img src="images/placeholder.png">
-      <p>${name}</p>
-    </div>
-    <div id="message">
-      <p>${message}</p>
-      <p id="time">${time}</p>
-    </div>`
-  }))
+  // Listen to clicks on the answer buttons.
+  document.querySelectorAll('#trivia #answers button').forEach(item =>
+    item.addEventListener("click", event => {
+      // Send the answer to the socket.
+      socket.emit("answer", event.target.textContent)
 
-  // Scroll to the bottom of the list.
-  $("ul").scrollTop = $("ul").scrollHeight
+      // Darken the selected button.
+      event.target.classList.add("selected")
 
-  last = name
-}
-
-// Initialise Socket.IO.
-let socket = io()
-
-// Check if the current page is the chat.
-if ($("#chat")) {
-  $("#chat form").addEventListener("submit", event => {
-    // Detect if the browser is on a mobile device.
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      // Close the keyboard after submit.
-      document.activeElement.blur()
-    }
-    
-    // Prevent the page from reloading.
-    event.preventDefault()
-
-    // Get the current time.
-    const time = new Date().toLocaleTimeString("nl-NL", {
-      hour: "numeric",
-      minute: "numeric"
+      // Disable all buttons.
+      document.querySelectorAll("#trivia #answers button").forEach(item =>
+        item.disabled = true
+      )
     })
-  
-    // Send the message to the socket.
-    socket.emit("message", {
-      message: $("#chat input").value,
-      name: $("#name").textContent,
-      time: time
-    })
-
-    // Add the message to the list.
-    add($("#chat input").value, $("#name").textContent, time, true)
-  
-    // Clear the input value.
-    $("#chat input").value = ""
-  })
-  
-  socket.on("message", message => {
-    // Check if the message does not come from the user itself.
-    if (message.name != $("#name").textContent) {
-      // Add the message to the list.
-      add(message.message, message.name, message.time, false)
-    }
-  })
-  
-  $("#chat form").addEventListener("keypress", function() {
-    // Tell the socket that the user has stopped typing after 3 seconds.
-    setTimeout(function() {
-      socket.emit("done-typing")
-    }, 3000)
-  
-    // Tell the socket that the user is typing.
-    socket.emit("typing", $("#name").textContent)
-  })
-  
-  socket.on("typing", name => {
-    // Check if the user itself is not the one typing.
-    if (name != $("#name").textContent) {
-      // Fill the typing indicator with text.
-      $("#typing").textContent = `${name} is typing...`
-    }
-  })
-  
-  socket.on("done-typing", () =>
-    // Empty the typing indicator.
-    $("#typing").textContent = ""
   )
+
+  socket.on("connection", length =>
+    // Update the amount of players.
+    $("#trivia #connected").innerText = `${length} players`
+  )
+
+  socket.on("trivia", trivia => {
+    // Update the trivia's question.
+    $("#trivia #question").innerText = trivia.question
+
+    // Update the trivia's correct answer.
+    $("#trivia #answers #correct").innerText = trivia.correct_answer
+
+    document.querySelectorAll("#trivia #answers button").forEach((item, index) => {
+      // Unselect the previously selected button.
+      item.classList.remove("selected")
+
+      // Enable all buttons.
+      item.disabled = false
+
+      // Update the trivia's incorrect answers.
+      if (index > 0) {
+        item.innerText = trivia.incorrect_answers[index - 1 ]
+      }
+    })
+  })
 }

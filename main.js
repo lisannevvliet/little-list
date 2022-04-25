@@ -10,6 +10,8 @@ const server = require("http").createServer(app)
 const io = require("socket.io")(server)
 // Import Handlebars.
 const handlebars = require("express-handlebars")
+// Import node-fetch.
+const fetch = require("node-fetch")
 
 // Render static files.
 app.use(express.static("static"))
@@ -23,45 +25,87 @@ app.use(express.urlencoded({
   extended: true
 }))
 
-io.on("connection", (socket) => {
-  console.log("A user connected.")
+let connected = []
+let trivia
+let answers = []
 
-  socket.on("message", message => {
-    io.emit("message", {
-      message: message.message,
-      name: message.name,
-      time: message.time
+io.on("connection", (socket) => {
+  // Add the connection ID to the list of connected clients.
+  connected.push(socket.id)
+
+  // Emit the amount of connected clients.
+  io.emit("connection", connected.length)
+
+  if (trivia == undefined) {
+    // Get the trivia from the API.
+    fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple")
+    .then(response =>
+      response.json()
+    )
+    .then(data => {
+      // Emit the trivia.
+      io.emit("trivia", data.results[0])
+
+      // Save the most recent trivia.
+      trivia = data.results[0]
+
+      // Clear the answers.
+      answers = []
     })
-  })
+  } else {
+    // Emit the existing trivia.
+    io.emit("trivia", trivia)
+  }
 
   socket.on("disconnect", () => {
-    console.log("User disconnected.")
+    // Remove the connection ID from the list of connected clients.
+    connected = connected.filter(function(id) {
+      return id != socket.id
+    })
+
+    // Emit the amount of connected clients.
+    io.emit("connection", connected.length)
   })
 
-  socket.on("typing", name => {
-    io.emit("typing", name)
-  })
+  socket.on("answer", answer => {
+    io.emit("answer", answer)
 
-  socket.on("done-typing", () => {
-    io.emit("done-typing")
+    answers.push(answer)
+
+    if (answers.length == connected.length) {
+      // Get the trivia from the API.
+      fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple")
+        .then(response =>
+          response.json()
+        )
+        .then(data => {
+          io.emit("trivia", data.results[0])
+
+          // Save the most recent trivia.
+          trivia = data.results[0]
+
+          // Clear the answers.
+          answers = []
+        })
+    }
   })
 })
 
 // Set and log the port for the HTTP server.
-server.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () =>
   console.log(`HTTP server running at http://localhost:${process.env.PORT}.`)
-})
+)
 
 // Listen to all GET requests on /.
-app.get("/", (_req, res) => {
+app.get("/", (_req, res) =>
   // Load the index page.
   res.render("index")
-})
+)
 
 // Listen to all POST requests on /.
 app.post("/", (req, res) => {
-  // Load the chat page with the name and whether it ends with an "s".
-  res.render("chat", {
+  // Load the trivia page with the name and whether it ends with an "s".
+  res.render("trivia", {
     name: req.body.name,
     s: !(req.body.name.endsWith("s") || req.body.name.endsWith("S"))
   })
