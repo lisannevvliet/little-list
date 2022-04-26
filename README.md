@@ -41,6 +41,28 @@ The external data source that is featured in this project is the [Open Trivia DB
 - difficulty
 - type
 
+The request looks like `https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple`. The following is a possible reponse:
+
+```
+{
+	"response_code": 0,
+	"results": [
+		{
+			"category": "Science: Computers",
+			"type": "multiple",
+			"difficulty": "easy",
+			"question": "If you were to code software in this language you&#039;d only be able to type 0&#039;s and 1&#039;s.",
+			"correct_answer": "Binary",
+			"incorrect_answers": [
+				"JavaScript",
+				"C++",
+				"Python"
+			]
+		}
+	]
+}
+```
+
 <!-- What external data source is featured in your project and what are its properties 🌠 -->
 
 ## Data life cycle
