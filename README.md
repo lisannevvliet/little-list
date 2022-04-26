@@ -22,7 +22,7 @@
 <!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
 
 ## Live demo
-https://real-time-web-2122.herokuapp.com/
+https://live-trivia.herokuapp.com/
 
 <!-- Add a link to your live demo in Github Pages 🌐-->
 <!-- replace the code in the /docs folder with your own, so you can showcase your work with GitHub Pages 🌍 -->
