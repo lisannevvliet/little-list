@@ -11,8 +11,8 @@ if ($("#trivia")) {
   let correct
 
   // Listen to clicks on the answer buttons.
-  document.querySelectorAll("#trivia #answers button").forEach(item =>
-    item.addEventListener("click", event => {
+  document.querySelectorAll("#trivia #answers button").forEach((item) => {
+    item.addEventListener("click", (event) => {
       if (event.target.innerText == correct) {
         // Make the selected button green.
         event.target.classList.add("green")
@@ -20,7 +20,7 @@ if ($("#trivia")) {
         // Make the selected button red.
         event.target.classList.add("red")
 
-        document.querySelectorAll("#trivia #answers button").forEach(element => {
+        document.querySelectorAll("#trivia #answers button").forEach((element) => {
           if (element.innerText == correct) {
             // Make the correct button green.
             element.classList.add("green")
@@ -29,7 +29,7 @@ if ($("#trivia")) {
       }
 
       // Disable all buttons.
-      document.querySelectorAll("#trivia #answers button").forEach(item =>
+      document.querySelectorAll("#trivia #answers button").forEach((item) =>
         item.disabled = true
       )
 
@@ -38,14 +38,14 @@ if ($("#trivia")) {
         socket.emit("answer", event.target.innerText)
       }, 500)
     })
-  )
+  })
 
-  socket.on("connection", length =>
+  socket.on("connection", (length) => {
     // Update the amount of players.
     $("#trivia #connected").innerHTML = `<span></span>${length} players`
-  )
+  })
 
-  socket.on("trivia", trivia => {
+  socket.on("trivia", (trivia) => {
     // Update the trivia's question.
     $("#trivia #question").innerText = trivia.question
 

@@ -41,17 +41,17 @@ io.on("connection", (socket) => {
   if (trivia == undefined) {
     // Get the trivia from the API.
     fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple")
-    .then(response =>
+    .then((response) => {
       response.json()
-    )
-    .then(data => {
+    })
+    .then((data) => {
       // Decode the trivia's question.
       data.results[0].question = entities.decodeHTML(data.results[0].question)
 
       // Decode the trivia's incorrect answers.
-      data.results[0].incorrect_answers.forEach((element, index) => 
+      data.results[0].incorrect_answers.forEach((element, index) => {
         data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
-      )
+      })
 
       // Add an array of randomized answers and decode the trivia's correct answer.
       data.results[0].answers = [entities.decodeHTML(data.results[0].correct_answer)].concat(data.results[0].incorrect_answers).sort(function() {
@@ -82,7 +82,7 @@ io.on("connection", (socket) => {
     io.emit("connection", connected.length)
   })
 
-  socket.on("answer", answer => {
+  socket.on("answer", (answer) => {
     io.emit("answer", answer)
 
     answers.push(answer)
@@ -90,17 +90,17 @@ io.on("connection", (socket) => {
     if (answers.length == connected.length) {
       // Get the trivia from the API.
       fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple")
-        .then(response =>
+        .then((response) => {
           response.json()
-        )
-        .then(data => {
+        })
+        .then((data) => {
           // Decode the trivia's question.
           data.results[0].question = entities.decodeHTML(data.results[0].question)
 
           // Decode the trivia's incorrect answers.
-          data.results[0].incorrect_answers.forEach((element, index) => 
+          data.results[0].incorrect_answers.forEach((element, index) => {
             data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
-          )
+          })
 
           // Add an array of randomized answers and decode the trivia's correct answer.
           data.results[0].answers = [entities.decodeHTML(data.results[0].correct_answer)].concat(data.results[0].incorrect_answers).sort(function() {
@@ -120,15 +120,15 @@ io.on("connection", (socket) => {
 })
 
 // Set and log the port for the HTTP server.
-server.listen(process.env.PORT, () =>
+server.listen(process.env.PORT, () => {
   console.log(`HTTP server running at http://localhost:${process.env.PORT}.`)
-)
+})
 
 // Listen to all GET requests on /.
-app.get("/", (_req, res) =>
-  // Load the index page.
-  res.render("index")
-)
+app.get("/", (_req, res) => {
+   // Load the index page.
+   res.render("index")
+})
 
 // Listen to all POST requests on /.
 app.post("/", (req, res) => {
