@@ -4,7 +4,7 @@
 
 body {
     background: #f5f7fb;
-    font-family: Roboto, system-ui;
+    font-family: Poppins, system-ui;
 }
 
 body > div {
@@ -38,7 +38,7 @@ form {
 }
 
 form input {
-    font-family: Roboto, system-ui;
+    font-family: Poppins, system-ui;
     font-size: medium;
     background: #f5f7fb;
     border: none;
@@ -87,7 +87,8 @@ form button img {
 
 #answers button {
     color: white;
-    font-family: Roboto, system-ui;
+    font-family: Poppins, system-ui;
+    font-size: normal;
     font-weight: bold;
     background: slateblue;
     transition: background .3s ease-in-out;
