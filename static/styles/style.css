@@ -110,7 +110,7 @@ form button img {
     transition: background .3s ease-in-out;
     border: none;
     border-radius: 10px;
-    flex: 48%;
+    flex: 46%;
     cursor: pointer;
 }
 
