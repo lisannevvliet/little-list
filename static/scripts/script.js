@@ -118,12 +118,12 @@ if ($("#trivia")) {
         // Send the message to the socket.
         socket.emit("message", {
             message: $("#trivia input").value,
-            name: $("#name").textContent,
+            name: $("h1").textContent,
             time: time
         })
 
         // Add the message to the list.
-        add($("#trivia input").value, $("#name").textContent, time, true)
+        add($("#trivia input").value, $("h1").textContent, time, true)
     
         // Clear the input value.
         $("#trivia input").value = ""
@@ -131,25 +131,25 @@ if ($("#trivia")) {
     
     socket.on("message", (message) => {
         // Check if the message does not come from the user itself.
-        if (message.name != $("#name").textContent) {
+        if (message.name != $("h1").textContent) {
             // Add the message to the list.
             add(message.message, message.name, message.time, false)
         }
     })
     
     $("#trivia form").addEventListener("keypress", function() {
-            // Tell the socket that the user has stopped typing after 3 seconds.
-            setTimeout(function() {
+        // Tell the socket that the user has stopped typing after 3 seconds.
+        setTimeout(function() {
             socket.emit("done-typing")
         }, 3000)
     
         // Tell the socket that the user is typing.
-        socket.emit("typing", $("#name").textContent)
+        socket.emit("typing", $("h1").textContent)
     })
     
     socket.on("typing", (name) => {
         // Check if the user itself is not the one typing.
-        if (name != $("#name").textContent) {
+        if (name != $("h1").textContent) {
             // Fill the typing indicator with text.
             $("#typing").textContent = `${name} is typing...`
         }
