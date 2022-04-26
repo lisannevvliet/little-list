@@ -117,6 +117,22 @@ io.on("connection", (socket) => {
                 })
         }
     })
+
+    socket.on("message", (message) => {
+        io.emit("message", {
+            message: message.message,
+            name: message.name,
+            time: message.time
+        })
+    })
+
+    socket.on("typing", (name) => {
+        io.emit("typing", name)
+    })
+    
+    socket.on("done-typing", () => {
+        io.emit("done-typing")
+    })
 })
 
 // Set and log the port for the HTTP server.

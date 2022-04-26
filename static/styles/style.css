@@ -5,32 +5,39 @@
 body {
     background: #f5f7fb;
     font-family: Roboto, system-ui;
-    margin: 0 auto;
 }
 
-section {
-    width: 90%;
-    background: white;
-    border-radius: 25px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    margin: 0 auto;
+body > div {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 h1 {
     text-align: center;
 }
 
-#enrollment form {
+section {
+    width: 90%;
+    height: 90%;
+    background: white;
+    border-radius: 25px;
+    padding: 20px;
+}
+
+#enrollment section {
+    height: fit-content;
+    margin: 0 auto;
+}
+
+form {
     display: flex;
     gap: 10px;
     justify-content: center;
 }
 
-#enrollment form input {
+form input {
     font-family: Roboto, system-ui;
     font-size: medium;
     background: #f5f7fb;
@@ -40,7 +47,7 @@ h1 {
     padding: 15px 25px;
 }
 
-#enrollment form button {
+form button {
     height: 50px;
     width: 50px;
     background: #3aa68b;
@@ -49,17 +56,11 @@ h1 {
     cursor: pointer;
 }
 
-#enrollment form button img {
+form button img {
     height: 20px;
 }
 
-#trivia {
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-}
-
-#trivia #connected span {
+#connected span {
     height: 10px;
     width: 10px;
     background: green;
@@ -78,13 +79,13 @@ h1 {
     }
 }
 
-#trivia #answers {
+#answers {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-#trivia #answers button {
+#answers button {
     color: white;
     font-family: Roboto, system-ui;
     font-weight: bold;
@@ -97,25 +98,113 @@ h1 {
     padding: 50px 10px;
 }
 
-#trivia #answers button:disabled {
+#answers button:disabled {
     background: grey;
     transition: background .3s ease-in-out;
     cursor: auto;
 }
 
-#trivia #answers button:enabled:hover {
+#answers button:enabled:hover {
     background: #594cac;
     transition: background .3s ease-in-out;
 }
 
-#trivia #answers button.green {
+#answers button.green {
     background: green;
     transition: background .3s ease-in-out;
 }
 
-#trivia #answers button.red {
+#answers button.red {
     background: red;
     transition: background .3s ease-in-out;
+}
+
+#chat {
+    display: flex;
+    flex-direction: column;
+}
+
+#spacing {
+    flex-grow: 1;
+}
+
+ul {
+    list-style-type: none;
+    overflow: scroll;
+    padding-left: 0;
+    margin: 0;
+}
+
+li {
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+li #user {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+}
+
+li.self #user {
+    display: none;
+}
+
+li.multiple #user {
+    visibility: hidden;
+}
+
+li #user img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: inline;
+    margin: 0 auto;
+}
+
+li #user p {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+
+li #message {
+    color: black;
+    background: #f5f7fb;
+    border-radius: 0 25px 25px 25px;
+    width: 50%;
+    padding: 25px;
+}
+
+li.self #message {
+    color: white;
+    background: #4d426d;
+    border-radius: 25px 0 25px 25px;
+    margin-left: auto;
+}
+
+li #message p {
+    word-break: break-word;
+    display: inline;
+    margin: 0;
+}
+
+li #message #time {
+    color: grey;
+    font-size: smaller;
+    float: right;
+}
+
+li.self #message #time {
+    color: lightgrey;
+}
+
+#typing {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 25px;
 }
 
 /* Laptop */
@@ -124,7 +213,7 @@ h1 {
         width: 70%;
     }
 
-    #enrollment input {
+    input {
         width: 70%;
     }
 }
@@ -135,7 +224,7 @@ h1 {
         width: 50%;
     }
 
-    #enrollment input {
+    input {
         width: 50%;
     }
 }
