@@ -42,7 +42,7 @@ io.on("connection", (socket) => {
         // Get the trivia from the API.
         fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple")
         .then((response) => {
-            response.json()
+            return response.json()
         })
         .then((data) => {
             // Decode the trivia's question.
@@ -91,7 +91,7 @@ io.on("connection", (socket) => {
             // Get the trivia from the API.
             fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple")
                 .then((response) => {
-                    response.json()
+                    return response.json()
                 })
                 .then((data) => {
                     // Decode the trivia's question.
