@@ -1,7 +1,7 @@
 {
-  "name": "barebonechat",
+  "name": "live-trivia",
   "version": "1.0.0",
-  "description": "It's a barebone chat app used as an example in a course on realtime web apps.",
+  "description": "",
   "main": "main.js",
   "scripts": {
     "test": "nodemon main.js",
@@ -9,18 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ju5tu5/barebonechat.git"
+    "url": "git+https://github.com/lisannevvliet/live-trivia.git"
   },
-  "keywords": [
-    "express",
-    "socket.io"
-  ],
-  "author": "Justus Sturkenboom <justus@ju5tu5.nl>",
+  "author": "",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/ju5tu5/barebonechat/issues"
+    "url": "https://github.com/lisannevvliet/live-trivia/issues"
   },
-  "homepage": "https://github.com/ju5tu5/barebonechat#readme",
+  "homepage": "https://github.com/lisannevvliet/live-trivia#readme",
   "dependencies": {
     "dotenv": "^16.0.0",
     "entities": "^4.3.0",
