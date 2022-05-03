@@ -27,16 +27,17 @@ app.use(express.urlencoded({
     extended: true
 }))
 
+let counter = 0
 let connected = []
 let trivia
 let answers = []
 
 io.on("connection", (socket) => {
-    // Add the connection ID to the list of connected clients.
-    connected.push(socket.id)
+    // Increment the amount of connected clients.
+    counter++
 
     // Emit the amount of connected clients.
-    io.emit("connection", connected.length)
+    io.emit("connection", counter)
 
     if (trivia == undefined) {
         // Get the trivia from the API.
@@ -72,14 +73,33 @@ io.on("connection", (socket) => {
         io.emit("trivia", trivia)
     }
 
-    socket.on("disconnect", () => {
-        // Remove the connection ID from the list of connected clients.
-        connected = connected.filter(function(id) {
-            return id != socket.id
+    socket.on("name", (name) => {
+        // Check if the connection ID is not already within the list of connected clients.
+        if (!JSON.stringify(connected).includes(socket.id)) {
+            // Add the name and connection ID to the list of connected clients.
+            connected.push([name.name, socket.id])
+        }
+
+        // Emit the names and connection IDs of the connected clients.
+        io.emit("name", {
+            name: name.name,
+            id: socket.id
         })
+    })
+
+    socket.on("disconnect", () => {
+        // Decrement the amount of connected clients.
+        counter--
 
         // Emit the amount of connected clients.
-        io.emit("connection", connected.length)
+        io.emit("connection", counter)
+
+        // Remove the name and connection ID from the list of connected clients.
+        connected.forEach((element, index) => {
+            if (element[1] == socket.id) {
+                connected.splice(index, 1)
+            }
+        })
     })
 
     socket.on("answer", (answer) => {
