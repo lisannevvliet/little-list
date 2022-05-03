@@ -99,10 +99,7 @@ if ($("#trivia")) {
         // Add the message to the list.
         $("#chat ul").appendChild(Object.assign(document.createElement("li"), {
             className: styling,
-            innerHTML: `<div id="user">
-                <img src="images/placeholder.png">
-                <p>${name}</p>
-            </div>
+            innerHTML: `<p id="name">${name}</p>
             <div id="message">
                 <p>${message}</p>
                 <p id="time">${time}</p>

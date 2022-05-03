@@ -76,23 +76,11 @@ form button img {
     flex-direction: column;
 }
 
-#connected span {
-    height: 10px;
-    width: 10px;
-    background: #3aa68b;
-    border-radius: 50%;
-    display: inline-block;
-    animation: pulse 1s linear 0s infinite alternate;
-    margin-right: 5px;
-}
-
-@keyframes pulse {
-    from {
-        background: #3aa68b;
-    }
-    to {
-        background-color: #9dd3c5;
-    }
+#trivia > section:first-of-type > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #answers {
@@ -136,7 +124,7 @@ form button img {
     transition: background .3s ease-in-out;
 }
 
-body div div {
+body > div > div {
     height: 90%;
     width: 100%;
     display: flex;
@@ -144,10 +132,34 @@ body div div {
     gap: 8px;
 }
 
+#players {
+    height: 50%;
+}
+
+#players #connected span {
+    height: 10px;
+    width: 10px;
+    background: #3aa68b;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 1s linear 0s infinite alternate;
+    margin-right: 5px;
+}
+
+@keyframes pulse {
+    from {
+        background: #3aa68b;
+    }
+    to {
+        background-color: #9dd3c5;
+    }
+}
+
 #chat {
     width: 100%;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
 }
 
 #spacing {
@@ -163,45 +175,27 @@ body div div {
 
 #chat li {
     display: flex;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-#chat li #user {
-    display: flex;
     flex-direction: column;
-    margin-right: 15px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
-#chat li.self #user {
-    display: none;
-}
-
-#chat li.multiple #user {
-    visibility: hidden;
-}
-
-#chat li #user img {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    display: inline;
-    margin: 0 auto;
-}
-
-#chat li #user p {
+#chat li #name {
     font-weight: bold;
-    text-align: center;
-    margin-top: 4px;
-    margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+#chat li.self #name, #chat li.multiple #name {
+    display: none;
 }
 
 #chat li #message {
     color: black;
     background: #f5f7fb;
     border-radius: 0 25px 25px 25px;
-    width: 50%;
-    padding: 25px;
+    width: 75%;
+    padding: 15px 25px;
 }
 
 #chat li.self #message {
