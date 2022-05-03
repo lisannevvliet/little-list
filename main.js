@@ -67,10 +67,10 @@ io.on("connection", (socket) => {
     }
 
     socket.on("name", (name) => {
-        // Add the name and connection ID to the list of connected clients.
-        connected.push([name, socket.id])
+        // Add the name, connection ID and score to the list of connected clients.
+        connected.push([name, socket.id, 0])
 
-        // Emit the names and connection IDs of the connected clients.
+        // Emit the names, connection IDs and scores of the connected clients.
         io.emit("names", connected)
     })
 
@@ -82,7 +82,19 @@ io.on("connection", (socket) => {
             }
         })
 
-        // Emit the names and connection IDs of the connected clients.
+        // Emit the names, connection IDs and scores of the connected clients.
+        io.emit("names", connected)
+    })
+
+    socket.on("correct", () => {
+        // Update the score within the list of connected clients.
+        connected.forEach((element, index) => {
+            if (element[1] == socket.id) {
+                connected[index][2]++
+            }
+        })
+
+        // Emit the names, connection IDs and scores of the connected clients.
         io.emit("names", connected)
     })
 

@@ -19,6 +19,9 @@ if ($("#trivia")) {
             if (event.target.innerText == correct) {
                 // Make the selected button green.
                 event.target.classList.add("green")
+
+                // Tell the socket that the user has scored a point.
+                socket.emit("correct")
             } else {
                 // Make the selected button red.
                 event.target.classList.add("red")
@@ -36,10 +39,10 @@ if ($("#trivia")) {
                 item.disabled = true
             )
 
-            // Send the answer to the socket after half a second.
+            // Send the answer to the socket after a second.
             setTimeout(function() {
                 socket.emit("answer", event.target.innerText)
-            }, 500)
+            }, 1000)
         })
     })
 
@@ -53,7 +56,7 @@ if ($("#trivia")) {
         names.forEach((name) => {
             // Add the player to the list.
             $("#players ul").appendChild(Object.assign(document.createElement("li"), {
-                innerHTML: name[0]
+                innerHTML: `${name[0]} ${name[2]}`
             }))
         })
 
