@@ -10,11 +10,8 @@ if ($("#trivia")) {
 
     let correct
 
-    // Send the name and connection ID to the socket.
-    socket.emit("name", {
-        name: $("h1").textContent,
-        id: socket.id
-    })
+    // Send the name to the socket.
+    socket.emit("name", $("h1").textContent)
 
     // Listen to clicks on the answer buttons.
     document.querySelectorAll("#trivia #answers button").forEach((item) => {
@@ -46,12 +43,10 @@ if ($("#trivia")) {
         })
     })
 
-    socket.on("connection", (counter) => {
-        // Update the amount of players.
-        $("#trivia #connected").innerHTML = `<span></span>${counter} players`
-    })
-
     socket.on("names", (names) => {
+        // Update the amount of players.
+        $("#trivia #connected").innerHTML = `<span></span>${names.length} online`
+
         // Clear the list.
         $("#players ul").innerHTML = ""
 
@@ -89,14 +84,14 @@ if ($("#trivia")) {
     // Keep track of who sent the most recent message.
     let last = ""
 
-    function add(message, name, time, self) {
+    function add(message, name, id, time, self) {
         let styling = ""
         
         if (self) {
             styling = "self"
         } else {
             // Stop showing the name and image when someone sends two or more messages in a row.
-            if (last == name) {
+            if (last == id) {
                 styling = "multiple"
             }
         }
@@ -117,7 +112,7 @@ if ($("#trivia")) {
         // Scroll to the bottom of the list.
         $("#chat ul").scrollTop = $("#chat ul").scrollHeight
 
-        last = name
+        last = id
     }
 
     $("#trivia form").addEventListener("submit", (event) => {
@@ -140,11 +135,12 @@ if ($("#trivia")) {
         socket.emit("message", {
             message: $("#trivia input").value,
             name: $("h1").textContent,
+            id: socket.id,
             time: time
         })
 
         // Add the message to the list.
-        add($("#trivia input").value, $("h1").textContent, time, true)
+        add($("#trivia input").value, $("h1").textContent, socket.id, time, true)
     
         // Clear the input value.
         $("#trivia input").value = ""
@@ -152,9 +148,9 @@ if ($("#trivia")) {
     
     socket.on("message", (message) => {
         // Check if the message does not come from the user itself.
-        if (message.name != $("h1").textContent) {
+        if (message.id != socket.id) {
             // Add the message to the list.
-            add(message.message, message.name, message.time, false)
+            add(message.message, message.name, message.id, message.time, false)
         }
     })
     

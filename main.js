@@ -27,18 +27,11 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-let counter = 0
 let connected = []
 let trivia
 let answers = []
 
 io.on("connection", (socket) => {
-    // Increment the amount of connected clients.
-    counter++
-
-    // Emit the amount of connected clients.
-    io.emit("connection", counter)
-
     if (trivia == undefined) {
         // Get the trivia from the API.
         fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple")
@@ -75,19 +68,13 @@ io.on("connection", (socket) => {
 
     socket.on("name", (name) => {
         // Add the name and connection ID to the list of connected clients.
-        connected.push([name.name, socket.id])
+        connected.push([name, socket.id])
 
         // Emit the names and connection IDs of the connected clients.
         io.emit("names", connected)
     })
 
     socket.on("disconnect", () => {
-        // Decrement the amount of connected clients.
-        counter--
-
-        // Emit the amount of connected clients.
-        io.emit("connection", counter)
-
         // Remove the name and connection ID from the list of connected clients.
         connected.forEach((element, index) => {
             if (element[1] == socket.id) {
@@ -139,6 +126,7 @@ io.on("connection", (socket) => {
         io.emit("message", {
             message: message.message,
             name: message.name,
+            id: message.id,
             time: message.time
         })
     })
