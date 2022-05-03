@@ -71,6 +71,7 @@ form button img {
 }
 
 #trivia section:first-of-type {
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -135,7 +136,16 @@ form button img {
     transition: background .3s ease-in-out;
 }
 
+body div div {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 #chat {
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -144,34 +154,34 @@ form button img {
     flex-grow: 1;
 }
 
-ul {
+#chat ul {
     list-style-type: none;
     overflow: scroll;
     padding-left: 0;
     margin: 0;
 }
 
-li {
+#chat li {
     display: flex;
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
-li #user {
+#chat li #user {
     display: flex;
     flex-direction: column;
     margin-right: 15px;
 }
 
-li.self #user {
+#chat li.self #user {
     display: none;
 }
 
-li.multiple #user {
+#chat li.multiple #user {
     visibility: hidden;
 }
 
-li #user img {
+#chat li #user img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -179,14 +189,14 @@ li #user img {
     margin: 0 auto;
 }
 
-li #user p {
+#chat li #user p {
     font-weight: bold;
     text-align: center;
     margin-top: 4px;
     margin-bottom: 0;
 }
 
-li #message {
+#chat li #message {
     color: black;
     background: #f5f7fb;
     border-radius: 0 25px 25px 25px;
@@ -194,26 +204,26 @@ li #message {
     padding: 25px;
 }
 
-li.self #message {
+#chat li.self #message {
     color: white;
     background: grey;
     border-radius: 25px 0 25px 25px;
     margin-left: auto;
 }
 
-li #message p {
+#chat li #message p {
     word-break: break-word;
     display: inline;
     margin: 0;
 }
 
-li #message #time {
+#chat li #message #time {
     color: grey;
     font-size: smaller;
     float: right;
 }
 
-li.self #message #time {
+#chat li.self #message #time {
     color: lightgrey;
 }
 

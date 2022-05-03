@@ -51,8 +51,19 @@ if ($("#trivia")) {
         $("#trivia #connected").innerHTML = `<span></span>${counter} players`
     })
 
-    socket.on("name", (name) => {
-        console.log(name)
+    socket.on("names", (names) => {
+        // Clear the list.
+        $("#players ul").innerHTML = ""
+
+        names.forEach((name) => {
+            // Add the player to the list.
+            $("#players ul").appendChild(Object.assign(document.createElement("li"), {
+                innerHTML: name[0]
+            }))
+        })
+
+        // Scroll to the bottom of the list.
+        $("#players ul").scrollTop = $("#players ul").scrollHeight
     })
 
     socket.on("trivia", (trivia) => {
@@ -91,7 +102,7 @@ if ($("#trivia")) {
         }
         
         // Add the message to the list.
-        $("ul").appendChild(Object.assign(document.createElement("li"), {
+        $("#chat ul").appendChild(Object.assign(document.createElement("li"), {
             className: styling,
             innerHTML: `<div id="user">
                 <img src="images/placeholder.png">
@@ -104,7 +115,7 @@ if ($("#trivia")) {
         }))
 
         // Scroll to the bottom of the list.
-        $("ul").scrollTop = $("ul").scrollHeight
+        $("#chat ul").scrollTop = $("#chat ul").scrollHeight
 
         last = name
     }

@@ -78,10 +78,7 @@ io.on("connection", (socket) => {
         connected.push([name.name, socket.id])
 
         // Emit the names and connection IDs of the connected clients.
-        io.emit("name", {
-            name: name.name,
-            id: socket.id
-        })
+        io.emit("names", connected)
     })
 
     socket.on("disconnect", () => {
@@ -97,6 +94,9 @@ io.on("connection", (socket) => {
                 connected.splice(index, 1)
             }
         })
+
+        // Emit the names and connection IDs of the connected clients.
+        io.emit("names", connected)
     })
 
     socket.on("answer", (answer) => {

@@ -2,7 +2,6 @@
 <div id="trivia">
     <section>
         <h2>Trivia</h2>
-        <p id="connected"></p>
         <p id="question"></p>
         <div id="answers">
             <button></button>
@@ -11,17 +10,24 @@
             <button></button>
         </div>
     </section>
-    <section id="chat">
-        <h2>Chat</h2>
-        <span id="spacing"></span>
-        <ul></ul>
-        <p id="typing"></p>
-        <form>
-            {{!-- https://stackoverflow.com/questions/13766015/is-it-possible-to-configure-a-required-field-to-ignore-white-space --}}
-            <input type="text" autocomplete="off" placeholder="Type a message" maxlength="280" pattern=".*\S+.*" required>
-            <button type="submit">
-                <img src="images/sent.png">
-            </button>
-        </form>
-</section>
+    <div>
+        <section id="players">
+            <h2>Players</h2>
+            <p id="connected"></p>
+            <ul></ul>
+        </section>
+        <section id="chat">
+            <h2>Chat</h2>
+            <span id="spacing"></span>
+            <ul></ul>
+            <p id="typing"></p>
+            <form>
+                {{!-- https://stackoverflow.com/questions/13766015/is-it-possible-to-configure-a-required-field-to-ignore-white-space --}}
+                <input type="text" autocomplete="off" placeholder="Type a message" maxlength="280" pattern=".*\S+.*" required>
+                <button type="submit">
+                    <img src="images/sent.png">
+                </button>
+            </form>
+        </section>
+    </div>
 </div>
