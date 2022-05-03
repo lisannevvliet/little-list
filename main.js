@@ -147,8 +147,8 @@ server.listen(process.env.PORT, () => {
 
 // Listen to all GET requests on /.
 app.get("/", (_req, res) => {
-     // Load the index page.
-     res.render("index")
+     // Load the enrollment page.
+     res.render("enrollment")
 })
 
 // Listen to all POST requests on /.
