@@ -10,6 +10,12 @@ if ($("#trivia")) {
 
     let correct
 
+    // Send the name and connection ID to the socket.
+    socket.emit("name", {
+        name: $("h1").textContent,
+        id: socket.id
+    })
+
     // Listen to clicks on the answer buttons.
     document.querySelectorAll("#trivia #answers button").forEach((item) => {
         item.addEventListener("click", (event) => {
@@ -43,12 +49,6 @@ if ($("#trivia")) {
     socket.on("connection", (counter) => {
         // Update the amount of players.
         $("#trivia #connected").innerHTML = `<span></span>${counter} players`
-
-        // Send the name and connection ID to the socket.
-        socket.emit("name", {
-            name: $("h1").textContent,
-            id: socket.id
-        })
     })
 
     socket.on("name", (name) => {

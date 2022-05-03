@@ -74,11 +74,8 @@ io.on("connection", (socket) => {
     }
 
     socket.on("name", (name) => {
-        // Check if the connection ID is not already within the list of connected clients.
-        if (!JSON.stringify(connected).includes(socket.id)) {
-            // Add the name and connection ID to the list of connected clients.
-            connected.push([name.name, socket.id])
-        }
+        // Add the name and connection ID to the list of connected clients.
+        connected.push([name.name, socket.id])
 
         // Emit the names and connection IDs of the connected clients.
         io.emit("name", {
