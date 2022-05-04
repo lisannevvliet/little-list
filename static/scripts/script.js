@@ -3,16 +3,6 @@ function $(element) {
     return document.querySelector(element)
 }
 
-// Submit the form upon a change in the category dropdown.
-$("#category select").onchange = function() {
-    $("#category").submit()
-}
-
-// Submit the form upon a change in the difficulty dropdown.
-$("#difficulty select").onchange = function() {
-    $("#difficulty").submit()
-}
-
 // Check if the current page is the trivia.
 if ($("#trivia")) {
     // Initialise Socket.IO.
@@ -54,6 +44,28 @@ if ($("#trivia")) {
                 socket.emit("answer", event.target.innerText)
             }, 1000)
         })
+    })
+
+    // Submit the form upon a change in the category dropdown.
+    $("#category select").onchange = function() {
+        $("#category").submit()
+
+        // Tell the socket that the trivia category changed.
+        socket.emit("change")
+    }
+
+    // Submit the form upon a change in the difficulty dropdown.
+    $("#difficulty select").onchange = function() {
+        $("#difficulty").submit()
+
+        // Tell the socket that the trivia difficulty changed.
+        socket.emit("change")
+    }
+
+    socket.on("change", (change) => {
+        // Select the correct category and difficulty.
+        $("#category select").value = change.category
+        $("#difficulty select").value = change.difficulty
     })
 
     socket.on("names", (names) => {

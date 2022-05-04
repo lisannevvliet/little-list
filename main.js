@@ -27,11 +27,14 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-let connected = []
 let trivia
 let answers = []
+let connected = []
 
+let name = ""
+let category = "any"
 let category_url = ""
+let difficulty = "any"
 let difficulty_url = ""
 
 io.on("connection", (socket) => {
@@ -126,6 +129,7 @@ io.on("connection", (socket) => {
                         return 0.5 - Math.random()
                     })
 
+                    // Emit the trivia.
                     io.emit("trivia", data.results[0])
 
                     // Save the most recent trivia.
@@ -135,6 +139,43 @@ io.on("connection", (socket) => {
                     answers = []
                 })
         }
+    })
+
+    socket.on("change", () => {
+        // Get the trivia from the API.
+        fetch(`https://opentdb.com/api.php?amount=1${category_url}${difficulty_url}`)
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                // Decode the trivia's question.
+                data.results[0].question = entities.decodeHTML(data.results[0].question)
+
+                // Decode the trivia's incorrect answers.
+                data.results[0].incorrect_answers.forEach((element, index) => {
+                    data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
+                })
+
+                // Add an array of randomized answers and decode the trivia's correct answer.
+                data.results[0].answers = [entities.decodeHTML(data.results[0].correct_answer)].concat(data.results[0].incorrect_answers).sort(function() {
+                    return 0.5 - Math.random()
+                })
+
+                // Emit the trivia.
+                io.emit("trivia", data.results[0])
+
+                // Emit the category and difficulty.
+                io.emit("change", {
+                    category: category,
+                    difficulty: difficulty
+                })
+
+                // Save the most recent trivia.
+                trivia = data.results[0]
+
+                // Clear the answers.
+                answers = []
+            })
     })
 
     socket.on("message", (message) => {
@@ -165,10 +206,6 @@ app.get("/", (_req, res) => {
      // Load the enrollment page.
      res.render("enrollment")
 })
-
-let name = ""
-let category = "any"
-let difficulty = "any"
 
 // Listen to all POST requests on /.
 app.post("/", (req, res) => {
