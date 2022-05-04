@@ -83,14 +83,22 @@ form button img {
     justify-content: center;
 }
 
+#question {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
 #answers {
     height: 50%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
 }
 
 #answers button {
+    height: 50%;
+    width: 48%;
     color: white;
     font-family: Poppins, system-ui;
     font-size: medium;
@@ -99,7 +107,6 @@ form button img {
     transition: background .3s ease-in-out;
     border: none;
     border-radius: 10px;
-    flex: 46%;
     cursor: pointer;
 }
 
