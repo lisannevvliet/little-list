@@ -3,6 +3,16 @@ function $(element) {
     return document.querySelector(element)
 }
 
+// Submit the form upon a change in the category dropdown.
+$("#category select").onchange = function() {
+    $("#category").submit()
+}
+
+// Submit the form upon a change in the difficulty dropdown.
+$("#difficulty select").onchange = function() {
+    $("#difficulty").submit()
+}
+
 // Check if the current page is the trivia.
 if ($("#trivia")) {
     // Initialise Socket.IO.
@@ -56,7 +66,7 @@ if ($("#trivia")) {
         names.forEach((name) => {
             // Add the player to the list.
             $("#players ul").appendChild(Object.assign(document.createElement("li"), {
-                innerHTML: `${name[0]} ${name[2]}`
+                innerHTML: `${name[0]} <span id="score">${name[2]}</span>`
             }))
         })
 

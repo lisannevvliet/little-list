@@ -18,8 +18,8 @@ const entities = require("entities")
 // Render static files.
 app.use(express.static("static"))
 
-// Set the view engine to Handlebars.
-app.engine("handlebars", handlebars.engine())
+// Set the view engine to Handlebars and import the helpers.
+app.engine("handlebars", handlebars.engine({ helpers: require("./helpers") }))
 app.set("view engine", "handlebars")
 
 // Parse incoming requests.
@@ -31,10 +31,13 @@ let connected = []
 let trivia
 let answers = []
 
+let category_url = ""
+let difficulty_url = ""
+
 io.on("connection", (socket) => {
     if (trivia == undefined) {
         // Get the trivia from the API.
-        fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy")
+        fetch(`https://opentdb.com/api.php?amount=1${category_url}${difficulty_url}`)
         .then((response) => {
             return response.json()
         })
@@ -105,7 +108,7 @@ io.on("connection", (socket) => {
 
         if (answers.length == connected.length) {
             // Get the trivia from the API.
-            fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy")
+            fetch(`https://opentdb.com/api.php?amount=1${category_url}${difficulty_url}`)
                 .then((response) => {
                     return response.json()
                 })
@@ -163,11 +166,43 @@ app.get("/", (_req, res) => {
      res.render("enrollment")
 })
 
+let name = ""
+let category = "any"
+let difficulty = "any"
+
 // Listen to all POST requests on /.
 app.post("/", (req, res) => {
-    // Load the trivia page with the name and whether it ends with an "s".
+    // Fill the name.
+    if (req.body.name) {
+        name = req.body.name
+    }
+
+    // Change the category.
+    if (req.body.category) {
+        if (req.body.category == "any") {
+            category_url = ""
+        } else {
+            category_url = `&category=${req.body.category}`
+        }
+
+        category = req.body.category
+    }
+
+    // Change the difficulty.
+    if (req.body.difficulty) {
+        if (req.body.difficulty == "any") {
+            difficulty_url = ""
+        } else {
+            difficulty_url = `&difficulty=${req.body.difficulty}`
+        }
+
+        difficulty = req.body.difficulty
+    }
+    
+    // Load the trivia page with the name, category and difficulty.
     res.render("trivia", {
-        name: req.body.name,
-        s: !(req.body.name.endsWith("s") || req.body.name.endsWith("S"))
+        name: name,
+        category: category,
+        difficulty: difficulty
     })
 })

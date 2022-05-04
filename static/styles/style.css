@@ -31,13 +31,13 @@ section {
     margin: 0 auto;
 }
 
-form {
+#enrollment form, #chat form {
     display: flex;
     gap: 10px;
     justify-content: center;
 }
 
-form input {
+form input[type="text"] {
     font-family: Poppins, system-ui;
     font-size: medium;
     background: #f5f7fb;
@@ -131,8 +131,8 @@ form button img {
     transition: background .3s ease-in-out;
 }
 
-#answers button.hide {
-    display: none;
+.hide {
+    display: none !important;
 }
 
 body > div > div {
@@ -145,6 +145,11 @@ body > div > div {
 
 #players {
     height: 50%;
+}
+
+#players #connected {
+    width: 50%;
+    margin: 0 auto 8px auto;
 }
 
 #players #connected span {
@@ -166,6 +171,27 @@ body > div > div {
     }
 }
 
+ul {
+    list-style-type: none;
+    overflow: scroll;
+    padding-left: 0;
+    margin: 0;
+}
+
+#players ul {
+    width: 50%;
+    margin: 0 auto;
+}
+
+#players li {
+    font-weight: bold;
+}
+
+#score {
+    font-weight: normal;
+    float: right;
+}
+
 #chat {
     width: 100%;
     display: flex;
@@ -175,13 +201,6 @@ body > div > div {
 
 #spacing {
     flex-grow: 1;
-}
-
-#chat ul {
-    list-style-type: none;
-    overflow: scroll;
-    padding-left: 0;
-    margin: 0;
 }
 
 #chat li {
