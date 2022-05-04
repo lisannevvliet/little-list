@@ -34,7 +34,7 @@ let answers = []
 io.on("connection", (socket) => {
     if (trivia == undefined) {
         // Get the trivia from the API.
-        fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple")
+        fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy")
         .then((response) => {
             return response.json()
         })
@@ -105,7 +105,7 @@ io.on("connection", (socket) => {
 
         if (answers.length == connected.length) {
             // Get the trivia from the API.
-            fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple")
+            fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy")
                 .then((response) => {
                     return response.json()
                 })

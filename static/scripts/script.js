@@ -75,12 +75,20 @@ if ($("#trivia")) {
             // Remove the result of the previously selected answer.
             item.classList.remove("green")
             item.classList.remove("red")
+            
+            // Show all buttons.
+            item.classList.remove("hide")
 
             // Enable all buttons.
             item.disabled = false
 
             // Update the trivia's answers.
             item.innerText = trivia.answers[index]
+
+            // Hide the last two buttons if there are only two answers.
+            if (trivia.answers.length == 2 && index > 1) {
+                item.classList.add("hide")
+            }
         })
     })
 

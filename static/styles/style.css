@@ -124,6 +124,10 @@ form button img {
     transition: background .3s ease-in-out;
 }
 
+#answers button.hide {
+    display: none;
+}
+
 body > div > div {
     height: 90%;
     width: 100%;
