@@ -13,7 +13,7 @@
         </div>
         <form id="category" action="/" method="post">
             <label for="category">Category</label>
-            <select name="category" onchange="this.form.submit()">
+            <select name="category">
                 <option value="any"{{#ifCond category "any"}} selected{{/ifCond}}>Any</option>
                 <option value="9"{{#ifCond category "9"}} selected{{/ifCond}}>General Knowledge</option>
                 <option value="10"{{#ifCond category "10"}} selected{{/ifCond}}>Entertainment: Books</option>
@@ -44,7 +44,7 @@
         </form>
         <form id="difficulty" action="/" method="post">
             <label for="difficulty">Difficulty</label>
-            <select name="difficulty" onchange="this.form.submit()">
+            <select name="difficulty">
                 <option value="any"{{#ifCond difficulty "any"}} selected{{/ifCond}}>Any</option>
                 <option value="easy"{{#ifCond difficulty "easy"}} selected{{/ifCond}}>Easy</option>
                 <option value="medium"{{#ifCond difficulty "medium"}} selected{{/ifCond}}>Medium</option>

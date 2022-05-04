@@ -132,7 +132,15 @@ form button img {
 }
 
 select {
+    background: #f5f7fb;
+    border: none;
+    border-radius: 10px;
     font-family: Poppins, system-ui;
+    padding: 10px;
+}
+
+form:first-of-type select {
+    margin-bottom: 8px;
 }
 
 .hide {
