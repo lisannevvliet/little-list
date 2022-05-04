@@ -39,9 +39,8 @@ The external data source that is featured in this project is the [Open Trivia DB
 - amount
 - category
 - difficulty
-- type
 
-The request looks like `https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple`. The following is a possible reponse:
+The request looks like `https://opentdb.com/api.php?amount=1&category=18&difficulty=easy`. The following is a possible reponse:
 
 ```
 {
