@@ -131,6 +131,10 @@ form button img {
     transition: background .3s ease-in-out;
 }
 
+select {
+    font-family: Poppins, system-ui;
+}
+
 .hide {
     display: none !important;
 }
