@@ -100,6 +100,11 @@ io.on("connection", (socket) => {
             }
         })
 
+        // Sort the list of connected clients based on the score (descending).
+        connected.sort(function(a, b) {
+            return b[2] - a[2]
+        })
+
         // Emit the names, connection IDs and scores of the connected clients.
         io.emit("names", connected)
     })
