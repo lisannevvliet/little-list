@@ -40,14 +40,14 @@ if ($("#trivia")) {
             )
 
             // Send the answer to the socket after a second.
-            setTimeout(function() {
+            setTimeout(() => {
                 socket.emit("answer", event.target.innerText)
             }, 1000)
         })
     })
 
     // Submit the form upon a change in the category dropdown.
-    $("#category select").onchange = function() {
+    $("#category select").onchange = () => {
         $("#category").submit()
 
         // Tell the socket that the trivia category changed.
@@ -55,7 +55,7 @@ if ($("#trivia")) {
     }
 
     // Submit the form upon a change in the difficulty dropdown.
-    $("#difficulty select").onchange = function() {
+    $("#difficulty select").onchange = () => {
         $("#difficulty").submit()
 
         // Tell the socket that the trivia difficulty changed.
@@ -184,9 +184,9 @@ if ($("#trivia")) {
         }
     })
     
-    $("#trivia form").addEventListener("keypress", function() {
+    $("#trivia form").addEventListener("keypress", () => {
         // Tell the socket that the user has stopped typing after 3 seconds.
-        setTimeout(function() {
+        setTimeout(() => {
             socket.emit("done-typing")
         }, 3000)
     
