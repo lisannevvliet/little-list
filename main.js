@@ -48,13 +48,16 @@ io.on("connection", (socket) => {
             // Decode the trivia's question.
             data.results[0].question = entities.decodeHTML(data.results[0].question)
 
+            // Decode the trivia's correct answer.
+            data.results[0].correct_answer = entities.decodeHTML(data.results[0].correct_answer)
+
             // Decode the trivia's incorrect answers.
             data.results[0].incorrect_answers.forEach((element, index) => {
                 data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
             })
 
-            // Add an array of randomized answers and decode the trivia's correct answer.
-            data.results[0].answers = [entities.decodeHTML(data.results[0].correct_answer)].concat(data.results[0].incorrect_answers).sort(function() {
+            // Add an array of randomized answers.
+            data.results[0].answers = [data.results[0].correct_answer].concat(data.results[0].incorrect_answers).sort(function() {
                 return 0.5 - Math.random()
             })
 
@@ -88,6 +91,13 @@ io.on("connection", (socket) => {
             }
         })
 
+        // Remove the answer from the list of answers.
+        answers.forEach((element, index) => {
+            if (element[1] == socket.id) {
+                answers.splice(index, 1)
+            }
+        })
+
         // Emit the names, connection IDs and scores of the connected clients.
         io.emit("names", connected)
     })
@@ -112,7 +122,7 @@ io.on("connection", (socket) => {
     socket.on("answer", (answer) => {
         io.emit("answer", answer)
 
-        answers.push(answer)
+        answers.push([answer, socket.id])
 
         if (answers.length == connected.length) {
             // Get the trivia from the API.
@@ -124,13 +134,16 @@ io.on("connection", (socket) => {
                     // Decode the trivia's question.
                     data.results[0].question = entities.decodeHTML(data.results[0].question)
 
+                    // Decode the trivia's correct answer.
+                    data.results[0].correct_answer = entities.decodeHTML(data.results[0].correct_answer)
+
                     // Decode the trivia's incorrect answers.
                     data.results[0].incorrect_answers.forEach((element, index) => {
                         data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
                     })
 
-                    // Add an array of randomized answers and decode the trivia's correct answer.
-                    data.results[0].answers = [entities.decodeHTML(data.results[0].correct_answer)].concat(data.results[0].incorrect_answers).sort(function() {
+                    // Add an array of randomized answers.
+                    data.results[0].answers = [data.results[0].correct_answer].concat(data.results[0].incorrect_answers).sort(function() {
                         return 0.5 - Math.random()
                     })
 
@@ -156,13 +169,16 @@ io.on("connection", (socket) => {
                 // Decode the trivia's question.
                 data.results[0].question = entities.decodeHTML(data.results[0].question)
 
+                // Decode the trivia's correct answer.
+                data.results[0].correct_answer = entities.decodeHTML(data.results[0].correct_answer)
+
                 // Decode the trivia's incorrect answers.
                 data.results[0].incorrect_answers.forEach((element, index) => {
                     data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
                 })
 
-                // Add an array of randomized answers and decode the trivia's correct answer.
-                data.results[0].answers = [entities.decodeHTML(data.results[0].correct_answer)].concat(data.results[0].incorrect_answers).sort(function() {
+                // Add an array of randomized answers.
+                data.results[0].answers = [data.results[0].correct_answer].concat(data.results[0].incorrect_answers).sort(function() {
                     return 0.5 - Math.random()
                 })
 

@@ -14,8 +14,8 @@ if ($("#trivia")) {
     socket.emit("name", $("h1").textContent)
 
     // Listen to clicks on the answer buttons.
-    document.querySelectorAll("#trivia #answers button").forEach((item) => {
-        item.addEventListener("click", (event) => {
+    document.querySelectorAll("#trivia #answers button").forEach((element) => {
+        element.addEventListener("click", (event) => {
             if (event.target.innerText == correct) {
                 // Make the selected button green.
                 event.target.classList.add("green")
