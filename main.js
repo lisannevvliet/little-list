@@ -57,8 +57,8 @@ io.on("connection", (socket) => {
             })
 
             // Add an array of randomized answers.
-            data.results[0].answers = [data.results[0].correct_answer].concat(data.results[0].incorrect_answers).sort(() => {
-                0.5 - Math.random()
+            data.results[0].answers = [data.results[0].correct_answer].concat(data.results[0].incorrect_answers).sort(function() {
+                return 0.5 - Math.random()
             })
 
             // Emit the trivia.
@@ -111,8 +111,8 @@ io.on("connection", (socket) => {
         })
 
         // Sort the list of connected clients based on the score (descending).
-        connected.sort((a, b) => {
-            b[2] - a[2]
+        connected.sort(function(a, b) {
+            return b[2] - a[2]
         })
 
         // Emit the names, connection IDs and scores of the connected clients.
@@ -143,8 +143,8 @@ io.on("connection", (socket) => {
                     })
 
                     // Add an array of randomized answers.
-                    data.results[0].answers = [data.results[0].correct_answer].concat(data.results[0].incorrect_answers).sort(() => {
-                        0.5 - Math.random()
+                    data.results[0].answers = [data.results[0].correct_answer].concat(data.results[0].incorrect_answers).sort(function() {
+                        return 0.5 - Math.random()
                     })
 
                     // Emit the trivia.
@@ -178,8 +178,8 @@ io.on("connection", (socket) => {
                 })
 
                 // Add an array of randomized answers.
-                data.results[0].answers = [data.results[0].correct_answer].concat(data.results[0].incorrect_answers).sort(() => {
-                    0.5 - Math.random()
+                data.results[0].answers = [data.results[0].correct_answer].concat(data.results[0].incorrect_answers).sort(function() {
+                    return 0.5 - Math.random()
                 })
 
                 // Emit the trivia.
