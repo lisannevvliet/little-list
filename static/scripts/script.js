@@ -93,6 +93,11 @@ if ($("#trivia")) {
         // Update the trivia's correct answer.
         correct = trivia.correct_answer
 
+        // Randomize the answers.
+        trivia.answers.sort(function() {
+            return 0.5 - Math.random()
+        })
+
         document.querySelectorAll("#trivia #answers button").forEach((item, index) => {
             // Remove the result of the previously selected answer.
             item.classList.remove("green")
