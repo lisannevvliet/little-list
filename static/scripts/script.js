@@ -145,7 +145,7 @@ if ($("#trivia")) {
         last = id
     }
 
-    $("#trivia form").addEventListener("submit", (event) => {
+    $("#chat form").addEventListener("submit", (event) => {
         // Detect if the browser is on a mobile device.
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             // Close the keyboard after submit.
@@ -163,17 +163,17 @@ if ($("#trivia")) {
     
         // Send the message to the socket.
         socket.emit("message", {
-            message: $("#trivia input").value,
+            message: $("#chat input").value,
             name: $("h1").textContent,
             id: socket.id,
             time: time
         })
 
         // Add the message to the list.
-        add($("#trivia input").value, $("h1").textContent, socket.id, time, true)
+        add($("#chat input").value, $("h1").textContent, socket.id, time, true)
     
         // Clear the input value.
-        $("#trivia input").value = ""
+        $("#chat input").value = ""
     })
     
     socket.on("message", (message) => {
@@ -184,7 +184,7 @@ if ($("#trivia")) {
         }
     })
     
-    $("#trivia form").addEventListener("keypress", () => {
+    $("#chat form").addEventListener("keypress", () => {
         // Tell the socket that the user has stopped typing after 3 seconds.
         setTimeout(() => {
             socket.emit("done-typing")
