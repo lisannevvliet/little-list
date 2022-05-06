@@ -196,14 +196,17 @@ if ($("#trivia")) {
         }, 3000)
     
         // Tell the socket that the user is typing.
-        socket.emit("typing", $("h1").textContent)
+        socket.emit("typing", {
+            name: $("h1").textContent,
+            id: socket.id
+        })
     })
     
-    socket.on("typing", (name) => {
+    socket.on("typing", (typing) => {
         // Check if the user itself is not the one typing.
-        if (name != $("h1").textContent) {
+        if (typing.id != socket.id) {
             // Fill the typing indicator with text.
-            $("#typing").textContent = `${name} is typing...`
+            $("#typing").textContent = `${typing.name} is typing...`
         }
     })
     

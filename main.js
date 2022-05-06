@@ -208,8 +208,11 @@ io.on("connection", (socket) => {
         })
     })
 
-    socket.on("typing", (name) => {
-        io.emit("typing", name)
+    socket.on("typing", (typing) => {
+        io.emit("typing", {
+            name: typing.name,
+            id: typing.id
+        })
     })
     
     socket.on("done-typing", () => {
