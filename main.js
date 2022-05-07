@@ -19,7 +19,9 @@ const entities = require("entities")
 app.use(express.static("static"))
 
 // Set the view engine to Handlebars and import the helpers.
-app.engine("handlebars", handlebars.engine({ helpers: require("./helpers") }))
+app.engine("handlebars", handlebars.engine({
+    helpers: require("./helpers")
+}))
 app.set("view engine", "handlebars")
 
 // Parse incoming requests.
@@ -100,6 +102,43 @@ io.on("connection", (socket) => {
 
         // Emit the names, connection IDs and scores of the connected clients.
         io.emit("names", connected)
+
+        // Emit the amount of players who have not answered yet.
+        io.emit("waiting", connected.length - answers.length)
+
+        if (answers.length == connected.length) {
+            // Get the trivia from the API.
+            fetch(`https://opentdb.com/api.php?amount=1${category_url}${difficulty_url}`)
+                .then((response) => {
+                    return response.json()
+                })
+                .then((data) => {
+                    // Decode the trivia's question.
+                    data.results[0].question = entities.decodeHTML(data.results[0].question)
+
+                    // Decode the trivia's correct answer.
+                    data.results[0].correct_answer = entities.decodeHTML(data.results[0].correct_answer)
+
+                    // Decode the trivia's incorrect answers.
+                    data.results[0].incorrect_answers.forEach((element, index) => {
+                        data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
+                    })
+
+                    // Add an array of randomized answers.
+                    data.results[0].answers = [data.results[0].correct_answer].concat(data.results[0].incorrect_answers).sort(function() {
+                        return 0.5 - Math.random()
+                    })
+
+                    // Emit the trivia.
+                    io.emit("trivia", data.results[0])
+
+                    // Save the most recent trivia.
+                    trivia = data.results[0]
+
+                    // Clear the answers.
+                    answers = []
+                })
+        }
     })
 
     socket.on("correct", () => {

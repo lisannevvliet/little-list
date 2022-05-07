@@ -118,8 +118,12 @@ form button img {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 #question {
@@ -214,8 +218,12 @@ form:first-of-type select {
 }
 
 @keyframes pulse {
-    from { background: #3aa68b; }
-    to { background-color: #9dd3c5; }
+    from {
+        background: #3aa68b;
+    }
+    to {
+        background-color: #9dd3c5;
+    }
 }
 
 ul {
