@@ -65,18 +65,20 @@ if ($("#trivia")) {
 
     // Submit the form upon a change in the category dropdown.
     $("#category select").onchange = () => {
-        $("#category").submit()
-
         // Tell the socket that the trivia category changed.
-        socket.emit("change")
+        socket.emit("change", {
+            category: $("#category select").value,
+            difficulty: ""
+        })
     }
 
     // Submit the form upon a change in the difficulty dropdown.
     $("#difficulty select").onchange = () => {
-        $("#difficulty").submit()
-
         // Tell the socket that the trivia difficulty changed.
-        socket.emit("change")
+        socket.emit("change", {
+            category: "",
+            difficulty: $("#difficulty select").value
+        })
     }
 
     socket.on("change", (change) => {

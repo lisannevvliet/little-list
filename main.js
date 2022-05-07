@@ -162,7 +162,29 @@ io.on("connection", (socket) => {
         }
     })
 
-    socket.on("change", () => {
+    socket.on("change", (change) => {
+        // Change the category.
+        if (change.category != "") {
+            if (change.category == "any") {
+                category_url = ""
+            } else {
+                category_url = `&category=${change.category}`
+            }
+
+            category = change.category
+        }
+
+        // Change the difficulty.
+        if (change.difficulty != "") {
+            if (change.difficulty == "any") {
+                difficulty_url = ""
+            } else {
+                difficulty_url = `&difficulty=${change.difficulty}`
+            }
+
+            difficulty = change.difficulty
+        }
+
         // Get the trivia from the API.
         fetch(`https://opentdb.com/api.php?amount=1${category_url}${difficulty_url}`)
             .then((response) => {
@@ -239,28 +261,6 @@ app.post("/", (req, res) => {
     // Fill the name.
     if (req.body.name) {
         name = req.body.name
-    }
-
-    // Change the category.
-    if (req.body.category) {
-        if (req.body.category == "any") {
-            category_url = ""
-        } else {
-            category_url = `&category=${req.body.category}`
-        }
-
-        category = req.body.category
-    }
-
-    // Change the difficulty.
-    if (req.body.difficulty) {
-        if (req.body.difficulty == "any") {
-            difficulty_url = ""
-        } else {
-            difficulty_url = `&difficulty=${req.body.difficulty}`
-        }
-
-        difficulty = req.body.difficulty
     }
     
     // Load the trivia page with the name, category and difficulty.
