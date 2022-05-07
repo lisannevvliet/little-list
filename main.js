@@ -124,6 +124,9 @@ io.on("connection", (socket) => {
 
         answers.push([answer, socket.id])
 
+        // Emit the amount of players who have not answered yet.
+        io.emit("waiting", connected.length - answers.length)
+
         if (answers.length == connected.length) {
             // Get the trivia from the API.
             fetch(`https://opentdb.com/api.php?amount=1${category_url}${difficulty_url}`)

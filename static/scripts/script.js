@@ -9,6 +9,7 @@ if ($("#trivia")) {
     let socket = io()
 
     let correct
+    let answered
 
     // Send the name to the socket.
     socket.emit("name", $("h1").textContent)
@@ -16,6 +17,9 @@ if ($("#trivia")) {
     // Listen to clicks on the answer buttons.
     document.querySelectorAll("#trivia #answers button").forEach((element) => {
         element.addEventListener("click", (event) => {
+            // Set the answered status to true.
+            answered = true
+
             if (event.target.innerText == correct) {
                 // Make the selected button green.
                 event.target.classList.add("green")
@@ -44,6 +48,19 @@ if ($("#trivia")) {
                 socket.emit("answer", event.target.innerText)
             }, 1000)
         })
+    })
+
+    socket.on("waiting", (waiting) => {
+        // Show the overlay if the user has answered and is not the last one who does so.
+        if (answered && waiting > 0) {
+            if (waiting == 1) {
+                $("#overlay div p").innerText = `Waiting for ${waiting} other player.`
+            } else {
+                $("#overlay div p").innerText = `Waiting for ${waiting} other players.`
+            }
+
+            $("#overlay").classList.add("show")
+        }
     })
 
     // Submit the form upon a change in the category dropdown.
@@ -87,6 +104,12 @@ if ($("#trivia")) {
     })
 
     socket.on("trivia", (trivia) => {
+        // Hide the overlay.
+        $("#overlay").classList.remove("show")
+
+        // Set the answered status to false.
+        answered = false
+        
         // Update the trivia's question.
         $("#trivia #question").innerText = trivia.question
 
