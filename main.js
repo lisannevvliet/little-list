@@ -31,7 +31,7 @@ app.use(express.urlencoded({
 
 let trivia
 let answers = []
-let connected = []
+let clients = []
 
 let name = ""
 let category = "any"
@@ -54,8 +54,8 @@ io.on("connection", (socket) => {
             data.results[0].correct_answer = entities.decodeHTML(data.results[0].correct_answer)
 
             // Decode the trivia's incorrect answers.
-            data.results[0].incorrect_answers.forEach((element, index) => {
-                data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
+            data.results[0].incorrect_answers.forEach((incorrect_answer, index) => {
+                data.results[0].incorrect_answers[index] = entities.decodeHTML(incorrect_answer)
             })
 
             // Add an array of randomized answers.
@@ -77,36 +77,36 @@ io.on("connection", (socket) => {
         io.emit("trivia", trivia)
     }
 
-    socket.on("name", (name) => {
+    socket.on("client", (client) => {
         // Add the name, connection ID and score to the list of connected clients.
-        connected.push([name, socket.id, 0])
+        clients.push([client, socket.id, 0])
 
         // Emit the names, connection IDs and scores of the connected clients.
-        io.emit("names", connected)
+        io.emit("clients", clients)
     })
 
     socket.on("disconnect", () => {
         // Remove the name and connection ID from the list of connected clients.
-        connected.forEach((element, index) => {
-            if (element[1] == socket.id) {
-                connected.splice(index, 1)
+        clients.forEach((client, index) => {
+            if (client[1] == socket.id) {
+                clients.splice(index, 1)
             }
         })
 
         // Remove the answer from the list of answers.
-        answers.forEach((element, index) => {
-            if (element[1] == socket.id) {
+        answers.forEach((answer, index) => {
+            if (answer == socket.id) {
                 answers.splice(index, 1)
             }
         })
 
         // Emit the names, connection IDs and scores of the connected clients.
-        io.emit("names", connected)
+        io.emit("clients", clients)
 
-        // Emit the amount of players who have not answered yet.
-        io.emit("waiting", connected.length - answers.length)
+        // Emit the amount of clients who have not answered yet.
+        io.emit("answers", clients.length - answers.length)
 
-        if (answers.length == connected.length) {
+        if (answers.length == clients.length) {
             // Get the trivia from the API.
             fetch(`https://opentdb.com/api.php?amount=1${category_url}${difficulty_url}`)
                 .then((response) => {
@@ -120,8 +120,8 @@ io.on("connection", (socket) => {
                     data.results[0].correct_answer = entities.decodeHTML(data.results[0].correct_answer)
 
                     // Decode the trivia's incorrect answers.
-                    data.results[0].incorrect_answers.forEach((element, index) => {
-                        data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
+                    data.results[0].incorrect_answers.forEach((incorrect_answer, index) => {
+                        data.results[0].incorrect_answers[index] = entities.decodeHTML(incorrect_answer)
                     })
 
                     // Add an array of randomized answers.
@@ -139,32 +139,36 @@ io.on("connection", (socket) => {
                     answers = []
                 })
         }
-    })
-
-    socket.on("correct", () => {
-        // Update the score within the list of connected clients.
-        connected.forEach((element, index) => {
-            if (element[1] == socket.id) {
-                connected[index][2]++
-            }
-        })
-
-        // Sort the list of connected clients based on the score (descending).
-        connected.sort(function(a, b) {
-            return b[2] - a[2]
-        })
-
-        // Emit the names, connection IDs and scores of the connected clients.
-        io.emit("names", connected)
     })
 
     socket.on("answer", (answer) => {
-        answers.push([answer, socket.id])
+        if (answer.correct) {
+            // Update the score within the list of connected clients.
+            clients.forEach((client, index) => {
+                if (client[1] == socket.id) {
+                    clients[index][2]++
+                }
+            })
 
-        // Emit the amount of players who have not answered yet.
-        io.emit("waiting", connected.length - answers.length)
+            // Sort the list of connected clients based on the score (descending).
+            clients.sort(function(a, b) {
+                return b[2] - a[2]
+            })
 
-        if (answers.length == connected.length) {
+            // Emit the names, connection IDs and scores of the connected clients.
+            io.emit("clients", clients)
+        }
+
+        answers.push(socket.id)
+
+        // Emit the amount of clients who have not answered yet.
+        io.emit("answers", clients.length - answers.length)
+
+
+
+        console.log(answers)
+
+        if (answers.length == clients.length) {
             // Get the trivia from the API.
             fetch(`https://opentdb.com/api.php?amount=1${category_url}${difficulty_url}`)
                 .then((response) => {
@@ -178,8 +182,8 @@ io.on("connection", (socket) => {
                     data.results[0].correct_answer = entities.decodeHTML(data.results[0].correct_answer)
 
                     // Decode the trivia's incorrect answers.
-                    data.results[0].incorrect_answers.forEach((element, index) => {
-                        data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
+                    data.results[0].incorrect_answers.forEach((incorrect_answer, index) => {
+                        data.results[0].incorrect_answers[index] = entities.decodeHTML(incorrect_answer)
                     })
 
                     // Add an array of randomized answers.
@@ -187,39 +191,42 @@ io.on("connection", (socket) => {
                         return 0.5 - Math.random()
                     })
 
-                    // Emit the trivia.
-                    io.emit("trivia", data.results[0])
+                    // Execute after a second, so that the client has time to see whether their answer was correct.
+                    setTimeout(() => {
+                        // Emit the trivia.
+                        io.emit("trivia", data.results[0])
 
-                    // Save the most recent trivia.
-                    trivia = data.results[0]
+                        // Save the most recent trivia.
+                        trivia = data.results[0]
 
-                    // Clear the answers.
-                    answers = []
+                        // Clear the answers.
+                        answers = []
+                    }, 1000)
                 })
         }
     })
 
-    socket.on("change", (change) => {
+    socket.on("options", (options) => {
         // Change the category.
-        if (change.category != "") {
-            if (change.category == "any") {
+        if (options.category != "") {
+            if (options.category == "any") {
                 category_url = ""
             } else {
-                category_url = `&category=${change.category}`
+                category_url = `&category=${options.category}`
             }
 
-            category = change.category
+            category = options.category
         }
 
         // Change the difficulty.
-        if (change.difficulty != "") {
-            if (change.difficulty == "any") {
+        if (options.difficulty != "") {
+            if (options.difficulty == "any") {
                 difficulty_url = ""
             } else {
-                difficulty_url = `&difficulty=${change.difficulty}`
+                difficulty_url = `&difficulty=${options.difficulty}`
             }
 
-            difficulty = change.difficulty
+            difficulty = options.difficulty
         }
 
         // Get the trivia from the API.
@@ -235,8 +242,8 @@ io.on("connection", (socket) => {
                 data.results[0].correct_answer = entities.decodeHTML(data.results[0].correct_answer)
 
                 // Decode the trivia's incorrect answers.
-                data.results[0].incorrect_answers.forEach((element, index) => {
-                    data.results[0].incorrect_answers[index] = entities.decodeHTML(element)
+                data.results[0].incorrect_answers.forEach((incorrect_answer, index) => {
+                    data.results[0].incorrect_answers[index] = entities.decodeHTML(incorrect_answer)
                 })
 
                 // Add an array of randomized answers.
@@ -248,7 +255,7 @@ io.on("connection", (socket) => {
                 io.emit("trivia", data.results[0])
 
                 // Emit the category and difficulty.
-                io.emit("change", {
+                io.emit("options", {
                     category: category,
                     difficulty: difficulty
                 })
@@ -261,20 +268,20 @@ io.on("connection", (socket) => {
             })
     })
 
+    socket.on("typing", (client) => {
+        io.emit("typing", {
+            name: client.name,
+            id: client.id,
+            typing: client.typing
+        })
+    })
+
     socket.on("message", (message) => {
         io.emit("message", {
             message: message.message,
             name: message.name,
             id: message.id,
             time: message.time
-        })
-    })
-
-    socket.on("typing", (typing) => {
-        io.emit("typing", {
-            name: typing.name,
-            id: typing.id,
-            typing: typing.typing
         })
     })
 })
