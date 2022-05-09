@@ -163,11 +163,7 @@ io.on("connection", (socket) => {
 
         // Emit the amount of clients who have not answered yet.
         io.emit("answers", clients.length - answers.length)
-
-
-
-        console.log(answers)
-
+        
         if (answers.length == clients.length) {
             // Get the trivia from the API.
             fetch(`https://opentdb.com/api.php?amount=1${category_url}${difficulty_url}`)
