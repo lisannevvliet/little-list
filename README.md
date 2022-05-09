@@ -12,8 +12,6 @@
 - [Sources](#sources)
 - [License](#license)
 
-<!-- Maybe a table of contents here? 📚 -->
-
 ## Description
 <!-- Start out with a title and a description -->
 <!-- ☝️ replace this description with a description of your own work -->
@@ -24,11 +22,8 @@
 ## Live demo
 https://live-trivia-rtw.herokuapp.com/
 
-<!-- Add a link to your live demo in Github Pages 🌐-->
-<!-- replace the code in the /docs folder with your own, so you can showcase your work with GitHub Pages 🌍 -->
-
 ## Installation
-<!-- How about a section that describes how to install this project? 🤓 -->
+To view, visit the [Heroku app](https://live-trivia-rtw.herokuapp.com/). To make local modifications, clone the repository and edit the files in an IDE.
 
 ## User guide and features
 <!-- ...but how does one use this project? What are its features 🤔 -->
@@ -40,7 +35,7 @@ The external data source that is featured in this project is the [Open Trivia DB
 - category
 - difficulty
 
-The request looks like `https://opentdb.com/api.php?amount=1&category=18&difficulty=easy`. The following is a possible reponse:
+The request may look like `https://opentdb.com/api.php?amount=1&category=18&difficulty=easy`. The following is a possible reponse:
 
 ```
 {
@@ -67,15 +62,21 @@ The request looks like `https://opentdb.com/api.php?amount=1&category=18&difficu
 ## Data life cycle
 ![](https://user-images.githubusercontent.com/90243819/167427355-d41d85f2-f3ef-4925-98b2-ef8647b9284a.png)
 
-<!-- This would be a good place for your data life cycle ♻️-->
-
 ## Checklist
-<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
+The completed tasks can be found in the [commit messages](https://github.com/lisannevvliet/live-trivia/commits/main). The following tasks could not be completed in the set time frame, but would be nice to have.
+
+- [ ] Support typing indicator for multiple users.
+- [ ] Hide the correct answer in JavaScript.
+- [ ] Implement modules in client-side JavaScript.
+- [ ] Avoid duplicate questions in a session.
+- [ ] Restore the chat upon re-entering.
+- [ ] [Implement HTTPS.](https://stackoverflow.com/questions/31156884/how-to-use-https-on-node-js-using-express-socket-io)
+- [ ] [Implement rooms.](https://github.com/lisannevvliet/live-trivia/issues/18)
+- [ ] Add offline support to Socket.IO.
+- [ ] Store data in Firebase.
 
 ## Sources
 <!-- We all stand on the shoulders of giants, please link all the sources you used in to create this project. -->
 
 ## License
 This project is licensed under the [GPL-3.0 license](https://github.com/lisannevvliet/real-time-web-2122/blob/main/LICENSE).
-
-<!-- How about a license here? When in doubt use GNU GPL v3. 📜  -->
