@@ -65,6 +65,8 @@ The request looks like `https://opentdb.com/api.php?amount=1&category=18&difficu
 <!-- What external data source is featured in your project and what are its properties 🌠 -->
 
 ## Data life cycle
+![](https://user-images.githubusercontent.com/90243819/167427355-d41d85f2-f3ef-4925-98b2-ef8647b9284a.png)
+
 <!-- This would be a good place for your data life cycle ♻️-->
 
 ## Checklist
