@@ -275,12 +275,9 @@ io.on("connection", (socket) => {
     socket.on("typing", (typing) => {
         io.emit("typing", {
             name: typing.name,
-            id: typing.id
+            id: typing.id,
+            typing: typing.typing
         })
-    })
-    
-    socket.on("done-typing", () => {
-        io.emit("done-typing")
     })
 })
 

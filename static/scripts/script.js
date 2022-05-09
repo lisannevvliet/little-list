@@ -217,26 +217,31 @@ if ($("#trivia")) {
     $("#chat form").addEventListener("keypress", () => {
         // Tell the socket that the user has stopped typing after 3 seconds.
         setTimeout(() => {
-            socket.emit("done-typing")
+            socket.emit("typing", {
+                name: $("h1").textContent,
+                id: socket.id,
+                typing: false
+            })
         }, 3000)
     
         // Tell the socket that the user is typing.
         socket.emit("typing", {
             name: $("h1").textContent,
-            id: socket.id
+            id: socket.id,
+            typing: true
         })
     })
     
     socket.on("typing", (typing) => {
         // Check if the user itself is not the one typing.
         if (typing.id != socket.id) {
-            // Fill the typing indicator with text.
-            $("#typing").textContent = `${typing.name} is typing...`
+            if (typing.typing) {
+                // Fill the typing indicator with text.
+                $("#typing").textContent = `${typing.name} is typing...`
+            } else {
+                // Empty the typing indicator.
+                $("#typing").textContent = ""
+            }
         }
-    })
-    
-    socket.on("done-typing", () => {
-        // Empty the typing indicator.
-        $("#typing").textContent = ""
     })
 }
