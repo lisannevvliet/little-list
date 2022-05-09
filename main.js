@@ -159,8 +159,6 @@ io.on("connection", (socket) => {
     })
 
     socket.on("answer", (answer) => {
-        io.emit("answer", answer)
-
         answers.push([answer, socket.id])
 
         // Emit the amount of players who have not answered yet.
