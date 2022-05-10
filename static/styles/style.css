@@ -135,11 +135,11 @@ form button img {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
 }
 
 #answers button {
-    min-height: 50%;
+    height: 50%;
     width: 48%;
     color: white;
     font-family: Poppins, system-ui;
