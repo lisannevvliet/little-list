@@ -264,7 +264,7 @@ ul {
 
 #chat {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     overflow: scroll;
@@ -354,7 +354,6 @@ ul {
     }
 
     #chat {
-        height: unset;
         margin-bottom: unset;
     }
 
