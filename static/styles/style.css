@@ -105,6 +105,7 @@ form button img {
 #overlay > div {
     background: white;
     border-radius: 10px;
+    text-align: center;
     padding: 5px 20px;
     display: flex;
     align-items: center;

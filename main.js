@@ -103,8 +103,18 @@ io.on("connection", (socket) => {
         // Emit the names, connection IDs and scores of the connected clients.
         io.emit("clients", clients)
 
-        // Emit the amount of clients who have not answered yet.
-        io.emit("answers", clients.length - answers.length)
+        // Array for the names of clients who have not answered yet.
+        let waiting = []
+
+        // Add the names of clients who have not answered yet to the array.
+        clients.forEach((client) => {
+            if (!answers.includes(client[1])) {
+                waiting.push(client[0])
+            }
+        })
+
+        // Emit the names of clients who have not answered yet.
+        io.emit("waiting", waiting)
 
         if (answers.length == clients.length) {
             // Get the trivia from the API.
@@ -161,8 +171,18 @@ io.on("connection", (socket) => {
 
         answers.push(socket.id)
 
-        // Emit the amount of clients who have not answered yet.
-        io.emit("answers", clients.length - answers.length)
+        // Array for the names of clients who have not answered yet.
+        let waiting = []
+
+        // Add the names of clients who have not answered yet to the array.
+        clients.forEach((client) => {
+            if (!answers.includes(client[1])) {
+                waiting.push(client[0])
+            }
+        })
+
+        // Emit the names of clients who have not answered yet.
+        io.emit("waiting", waiting)
         
         if (answers.length == clients.length) {
             // Get the trivia from the API.

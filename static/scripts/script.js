@@ -50,15 +50,15 @@ if ($("#trivia")) {
         })
     })
 
-    socket.on("answers", (amount) => {
+    socket.on("waiting", (waiting) => {
         // Show the overlay if the client has answered and is not the last one who does so.
-        if (answered && amount > 0) {
+        if (answered && waiting.length > 0) {
             // Execute after a second, so that the client has time to see whether their answer was correct.
             setTimeout(() => {
-                if (amount == 1) {
-                    $("#overlay div p").innerText = `Waiting for ${amount} other player.`
+                if (waiting.length == 1) {
+                    $("#overlay div p").innerText = `Waiting for ${waiting[0]}.`
                 } else {
-                    $("#overlay div p").innerText = `Waiting for ${amount} other players.`
+                    $("#overlay div p").innerText = `Waiting for ${waiting.slice(0, -1).join(", ")} and ${waiting.slice(-1)}.`
                 }
 
                 $("#overlay").classList.add("show")
