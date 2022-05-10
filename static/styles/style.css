@@ -11,7 +11,7 @@ body > div {
     height: 86vh;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
 }
 
 h1, h2 {
@@ -188,8 +188,13 @@ form button img {
     margin-bottom: 8px;
 }
 
+#category label, #difficulty label {
+    font-weight: bold;
+}
+
 select {
     width: 100%;
+    color: black;
     background: #f5f7fb;
     border: none;
     border-radius: 10px;
@@ -205,7 +210,7 @@ select {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    gap: 8px;
+    gap: 16px;
 }
 
 #players {
@@ -348,11 +353,16 @@ ul {
     }
 
     #players-chat {
+        gap: 8px;
         flex-shrink: unset;
     }
 
     #chat {
         margin-bottom: unset;
+    }
+
+    body > div {
+        gap: 8px;
     }
 }
 
