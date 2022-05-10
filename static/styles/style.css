@@ -135,7 +135,7 @@ form button img {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
 }
 
 #answers button {
@@ -292,7 +292,7 @@ ul {
     background: #f5f7fb;
     border-radius: 0 25px 25px 25px;
     width: 75%;
-    padding: 15px 25px;
+    padding: 10px 25px;
 }
 
 #chat li.self #message {
