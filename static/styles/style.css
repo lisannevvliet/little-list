@@ -194,6 +194,10 @@ select {
     margin-left: 16px;
 }
 
+#category select {
+    width: 100%;
+}
+
 .hide {
     display: none !important;
 }
@@ -331,6 +335,10 @@ ul {
     #answers {
         height: 50%;
         margin-bottom: unset;
+    }
+
+    #category select {
+        width: unset;
     }
 
     #players-chat {
