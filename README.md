@@ -13,8 +13,7 @@
 - [License](#license)
 
 ## Description
-<!-- Start out with a title and a description -->
-<!-- ☝️ replace this description with a description of your own work -->
+Live Trivia is a real-time trivia quiz, to be played with friends and/or strangers. The category and difficulty of the trivia quiz can be changed. On the right, there is a list of online players and a chat. Everything is real-time, built with socket events.
 
 ## Poster
 <!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
@@ -26,7 +25,7 @@ https://live-trivia-rtw.herokuapp.com/
 To view, visit the [Heroku app](https://live-trivia-rtw.herokuapp.com/). To make local modifications, clone the repository and edit the files in an IDE.
 
 ## User guide and features
-<!-- ...but how does one use this project? What are its features 🤔 -->
+To start Live Trivia, simply visit the website, enter a name and start playing! After choosing an answer, it will turn green if it is correct and red if it is not. Also, if the answer is incorrect, the correct answer will be shown. When waiting for other players to answer, a loading pop-up will appear with the names of the players everyone is waiting for. Only when all players have answered, the next question will appear. It is also possible to change the category and difficulty of the trivia quiz for all players. On the right, there is a list of online players and a chat. When another player is typing, a typing indicator will be shown in the chat. It will not be a problem if there are two people playing with an identical name. There is a limit on the amount of characters allowed in messages (as well as in names), to prevent misuse of the given bandwith. Upon the disconnection of a player, the game will stop waiting for an answer of that player, remove it from the list of online players and continue playing.
 
 ## External data source
 The external data source that is featured in this project is the [Open Trivia DB](https://opentdb.com). From this API, the following properties are used:
@@ -63,15 +62,15 @@ The request may look like `https://opentdb.com/api.php?amount=1&category=18&diff
 ## Checklist
 The completed tasks can be found in the [commit messages](https://github.com/lisannevvliet/live-trivia/commits/main). The following tasks could not be completed in the set time frame, but would be nice to have.
 
-- [ ] Support typing indicator for multiple users.
+- [ ] Support typing indicator for multiple users typing at the same time.
 - [ ] Do not store the correct answer in client-side JavaScript.
 - [ ] Implement modules in client-side JavaScript.
 - [ ] Avoid duplicate questions in a session.
-- [ ] Restore the chat upon re-entering.
-- [ ] Implement [HTTPS](https://stackoverflow.com/questions/31156884/how-to-use-https-on-node-js-using-express-socket-io).
-- [ ] Implement rooms to limit the amount of clients to 4.
-- [ ] Add offline support to Socket.IO.
-- [ ] Store data in Firebase.
+- [ ] Restore the chat from localStorage upon re-entering.
+- [ ] Use [HTTPS](https://stackoverflow.com/questions/31156884/how-to-use-https-on-node-js-using-express-socket-io) server instead of HTTP.
+- [ ] Limit the amount of clients to 4 using rooms.
+- [ ] Add offline support by listening to the corresponding socket event.
+- [ ] Store data in a Firebase database.
 
 ## Sources
 The only two sources I used are the [Socket.IO documentation](https://socket.io/get-started/chat) and [Stack Overflow](https://stackoverflow.com/questions/13766015/is-it-possible-to-configure-a-required-field-to-ignore-white-space), to forbid clients from submitting a chat message with only spaces.
