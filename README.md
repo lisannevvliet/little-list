@@ -16,7 +16,8 @@
 Live Trivia is a real-time trivia quiz, to be played with friends and/or strangers. The category and difficulty of the trivia quiz can be changed. On the right, there is a list of online players and a chat. Everything is real-time, built with socket events.
 
 ## Poster
-<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
+![](https://user-images.githubusercontent.com/90243819/167648302-b832fc30-5830-46ac-a4b3-d3febf00c9ec.png)
+![](https://user-images.githubusercontent.com/90243819/167648313-c95f910b-4bbd-42d5-a0c7-322a8b401f47.png)
 
 ## Live demo
 https://live-trivia-rtw.herokuapp.com/
