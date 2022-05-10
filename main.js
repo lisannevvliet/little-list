@@ -141,8 +141,8 @@ io.on("connection", (socket) => {
         }
     })
 
-    socket.on("answer", (answer) => {
-        if (answer.correct) {
+    socket.on("answer", (correct) => {
+        if (correct) {
             // Update the score within the list of connected clients.
             clients.forEach((client, index) => {
                 if (client[1] == socket.id) {

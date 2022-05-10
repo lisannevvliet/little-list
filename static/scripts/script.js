@@ -46,10 +46,7 @@ if ($("#trivia")) {
             )
 
             // Send the answer to the socket.
-            socket.emit("answer", {
-                answer: event.target.innerText,
-                correct: correct
-            })
+            socket.emit("answer", correct)
         })
     })
 
