@@ -127,7 +127,6 @@ form button img {
 
 #question {
     text-align: center;
-    margin-bottom: 32px;
 }
 
 #answers {
@@ -140,7 +139,7 @@ form button img {
 }
 
 #answers button {
-    height: 50%;
+    min-height: 50%;
     width: 48%;
     color: white;
     font-family: Poppins, system-ui;
@@ -271,6 +270,7 @@ ul {
 }
 
 #chat li {
+    font-size: small;
     display: flex;
     flex-direction: column;
     margin-top: 8px;
@@ -328,6 +328,10 @@ ul {
 @media only screen and (min-width: 768px) {
     #trivia {
         flex-direction: row;
+    }
+
+    #question {
+        margin-bottom: 32px;
     }
 
     #answers {
