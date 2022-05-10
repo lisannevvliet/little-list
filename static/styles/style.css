@@ -39,7 +39,6 @@ section {
 
 form input[type="text"] {
     font-family: Poppins, system-ui;
-    font-size: medium;
     background: #f5f7fb;
     border: none;
     border-radius: 25px;
@@ -175,7 +174,12 @@ form button img {
     transition: background .3s ease-in-out;
 }
 
+#answers button.hide {
+    visibility: hidden;
+}
+
 #category, #difficulty {
+    font-size: small;
     display: flex;
     align-items: center;
 }
@@ -185,21 +189,14 @@ form button img {
 }
 
 select {
+    width: 100%;
     background: #f5f7fb;
     border: none;
     border-radius: 10px;
     font-family: Poppins, system-ui;
-    flex-grow: 1;
-    padding: 10px;
+    font-size: small;
+    padding: 8px;
     margin-left: 16px;
-}
-
-#category select {
-    width: 100%;
-}
-
-.hide {
-    display: none !important;
 }
 
 #players-chat {
@@ -217,6 +214,7 @@ select {
 
 #players #connected {
     width: 50%;
+    font-size: small;
     margin: 0 auto 8px auto;
 }
 
@@ -334,11 +332,10 @@ ul {
 
     #answers {
         height: 50%;
-        margin-bottom: unset;
     }
 
-    #category select {
-        width: unset;
+    select {
+        font-size: unset;
     }
 
     #players-chat {
