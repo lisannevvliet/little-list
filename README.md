@@ -64,7 +64,7 @@ The request may look like `https://opentdb.com/api.php?amount=1&category=18&diff
 The completed tasks can be found in the [commit messages](https://github.com/lisannevvliet/live-trivia/commits/main). The following tasks could not be completed in the set time frame, but would be nice to have.
 
 - [ ] Support typing indicator for multiple users.
-- [ ] Hide the correct answer in JavaScript.
+- [ ] Do not store the correct answer in client-side JavaScript.
 - [ ] Implement modules in client-side JavaScript.
 - [ ] Avoid duplicate questions in a session.
 - [ ] Restore the chat upon re-entering.
