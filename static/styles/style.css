@@ -74,6 +74,7 @@ form button img {
     width: 100%;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
 #question-answers {
@@ -328,6 +329,10 @@ ul {
 @media only screen and (min-width: 768px) {
     #trivia {
         flex-direction: row;
+    }
+
+    #trivia section:first-of-type {
+        flex-shrink: unset;
     }
 
     #question {
