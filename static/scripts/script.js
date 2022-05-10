@@ -118,13 +118,16 @@ if ($("#trivia")) {
         // Update the trivia's question.
         $("#trivia #question").innerText = trivia.question
 
-        // Update the trivia's correct answer.
-        answer = trivia.correct_answer
+        // Check if the retrieved trivia is the same as the one shown.
+        if (answer != trivia.correct_answer) {
+            // Update the trivia's correct answer.
+            answer = trivia.correct_answer
 
-        // Randomize the answers.
-        trivia.answers.sort(function() {
-            return 0.5 - Math.random()
-        })
+            // Randomize the answers.
+            trivia.answers.sort(function() {
+                return 0.5 - Math.random()
+            })
+        }
 
         document.querySelectorAll("#trivia #answers button").forEach((element, index) => {
             // Remove the result of the previously selected answer.
