@@ -57,8 +57,6 @@ The request may look like `https://opentdb.com/api.php?amount=1&category=18&diff
 }
 ```
 
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
-
 ## Data life cycle
 ![](https://user-images.githubusercontent.com/90243819/167575498-5934f43e-d863-4130-ab7d-4bc61f293213.png)
 
@@ -70,13 +68,13 @@ The completed tasks can be found in the [commit messages](https://github.com/lis
 - [ ] Implement modules in client-side JavaScript.
 - [ ] Avoid duplicate questions in a session.
 - [ ] Restore the chat upon re-entering.
-- [ ] [Implement HTTPS.](https://stackoverflow.com/questions/31156884/how-to-use-https-on-node-js-using-express-socket-io)
-- [ ] [Implement rooms.](https://github.com/lisannevvliet/live-trivia/issues/18)
+- [ ] Implement [HTTPS](https://stackoverflow.com/questions/31156884/how-to-use-https-on-node-js-using-express-socket-io).
+- [ ] Implement rooms to limit the amount of clients to 4.
 - [ ] Add offline support to Socket.IO.
 - [ ] Store data in Firebase.
 
 ## Sources
-<!-- We all stand on the shoulders of giants, please link all the sources you used in to create this project. -->
+The only two sources I used are the [Socket.IO documentation](https://socket.io/get-started/chat) and [Stack Overflow](https://stackoverflow.com/questions/13766015/is-it-possible-to-configure-a-required-field-to-ignore-white-space), to forbid clients from submitting a chat message with only spaces.
 
 ## License
 This project is licensed under the [GPL-3.0 license](https://github.com/lisannevvliet/real-time-web-2122/blob/main/LICENSE).
