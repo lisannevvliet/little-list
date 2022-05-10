@@ -76,6 +76,10 @@ form button img {
     flex-direction: column;
 }
 
+#question-answers-options {
+    height: 75vh;
+}
+
 #question-answers {
     height: 100%;
     display: flex;
@@ -334,6 +338,10 @@ ul {
 @media only screen and (min-width: 768px) {
     #trivia {
         flex-direction: row;
+    }
+
+    #question-answers-options {
+        height: 90%;
     }
 
     #question {

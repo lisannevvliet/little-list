@@ -3,7 +3,7 @@
         <h1>Enter your name</h1>
         <form action="/" method="post">
             {{!-- https://stackoverflow.com/questions/13766015/is-it-possible-to-configure-a-required-field-to-ignore-white-space --}}
-            <input type="text" name="name" placeholder="Name" maxlength="15" pattern=".*\S+.*" required>
+            <input type="text" name="name" placeholder="Name" maxlength="15" pattern=".*\S+.*" autofocus required>
             <button type="submit">
                 <img src="images/sent.png">
             </button>
