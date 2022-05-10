@@ -132,11 +132,12 @@ form button img {
 }
 
 #answers {
-    height: 50%;
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+    margin-bottom: 32px;
 }
 
 #answers button {
@@ -174,16 +175,23 @@ form button img {
     transition: background .3s ease-in-out;
 }
 
+#category, #difficulty {
+    display: flex;
+    align-items: center;
+}
+
+#category {
+    margin-bottom: 8px;
+}
+
 select {
     background: #f5f7fb;
     border: none;
     border-radius: 10px;
     font-family: Poppins, system-ui;
+    flex-grow: 1;
     padding: 10px;
-}
-
-form:first-of-type select {
-    margin-bottom: 8px;
+    margin-left: 16px;
 }
 
 .hide {
@@ -195,6 +203,7 @@ form:first-of-type select {
     width: 100%;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     gap: 8px;
 }
 
@@ -252,6 +261,7 @@ ul {
     display: flex;
     flex-direction: column;
     overflow: scroll;
+    margin-bottom: 24px;
 }
 
 #spacing {
@@ -316,6 +326,19 @@ ul {
 @media only screen and (min-width: 768px) {
     #trivia {
         flex-direction: row;
+    }
+
+    #answers {
+        height: 50%;
+        margin-bottom: unset;
+    }
+
+    #players-chat {
+        flex-shrink: unset;
+    }
+
+    #chat {
+        margin-bottom: unset;
     }
 }
 

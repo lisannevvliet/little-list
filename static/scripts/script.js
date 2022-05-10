@@ -106,9 +106,6 @@ if ($("#trivia")) {
                 innerHTML: `${client[0]} <span id="score">${client[2]}</span>`
             }))
         })
-
-        // Scroll to the bottom of the list.
-        $("#players ul").scrollTop = $("#players ul").scrollHeight
     })
 
     socket.on("trivia", (trivia) => {
