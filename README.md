@@ -60,7 +60,7 @@ The request may look like `https://opentdb.com/api.php?amount=1&category=18&diff
 <!-- What external data source is featured in your project and what are its properties 🌠 -->
 
 ## Data life cycle
-![](https://user-images.githubusercontent.com/90243819/167427355-d41d85f2-f3ef-4925-98b2-ef8647b9284a.png)
+![](https://user-images.githubusercontent.com/90243819/167575498-5934f43e-d863-4130-ab7d-4bc61f293213.png)
 
 ## Checklist
 The completed tasks can be found in the [commit messages](https://github.com/lisannevvliet/live-trivia/commits/main). The following tasks could not be completed in the set time frame, but would be nice to have.
