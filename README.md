@@ -16,7 +16,6 @@
 Live Trivia is a real-time trivia quiz, to be played with friends and/or strangers. The category and difficulty of the trivia quiz can be changed. On the right, there is a list of online players and a chat. Everything is real-time, built with socket events.
 
 ## Poster
-![](https://user-images.githubusercontent.com/90243819/167648302-b832fc30-5830-46ac-a4b3-d3febf00c9ec.png)
 ![](https://user-images.githubusercontent.com/90243819/167648313-c95f910b-4bbd-42d5-a0c7-322a8b401f47.png)
 
 ## Live demo
@@ -58,12 +57,11 @@ The request may look like `https://opentdb.com/api.php?amount=1&category=18&diff
 ```
 
 ## Data life cycle
-![](https://user-images.githubusercontent.com/90243819/167636818-363c1211-bd84-4857-9d9f-9d9b6f9786d7.png)
+![](https://user-images.githubusercontent.com/90243819/167811139-45d262bf-129f-46cc-a824-49c067e8fca5.png)
 
 ## Checklist
 The completed tasks can be found in the [commit messages](https://github.com/lisannevvliet/live-trivia/commits/main). The following tasks could not be completed in the set time frame, but would be nice to have.
 
-- [ ] Support typing indicator for multiple users typing at the same time.
 - [ ] Do not store the correct answer in client-side JavaScript.
 - [ ] Implement modules in client-side JavaScript.
 - [ ] Avoid duplicate questions in a session.
