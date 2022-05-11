@@ -56,8 +56,10 @@ if ($("#trivia")) {
             // Execute after a second, so that the client has time to see whether their answer was correct.
             setTimeout(() => {
                 if (waiting.length == 1) {
+                    // Fill the typing indicator with text.
                     $("#overlay div p").innerText = `Waiting for ${waiting[0]}.`
                 } else {
+                    // Fill the typing indicator with text.
                     $("#overlay div p").innerText = `Waiting for ${waiting.slice(0, -1).join(", ")} and ${waiting.slice(-1)}.`
                 }
 
@@ -179,33 +181,40 @@ if ($("#trivia")) {
     }
 
     $("#chat form").addEventListener("keypress", () => {
+        // Tell the socket that the client is typing.
+        socket.emit("typing", {
+            name: $("h1").textContent,
+            typing: true
+        })
+
         // Tell the socket that the client has stopped typing after 3 seconds.
         setTimeout(() => {
             socket.emit("typing", {
                 name: $("h1").textContent,
-                id: socket.id,
                 typing: false
             })
         }, 3000)
-    
-        // Tell the socket that the client is typing.
-        socket.emit("typing", {
-            name: $("h1").textContent,
-            id: socket.id,
-            typing: true
-        })
     })
     
-    socket.on("typing", (client) => {
-        // Check if the client itself is not the one typing.
-        if (client.id != socket.id) {
-            if (client.typing) {
-                // Fill the typing indicator with text.
-                $("#typing").textContent = `${client.name} is typing...`
-            } else {
-                // Empty the typing indicator.
-                $("#typing").textContent = ""
+    socket.on("typing", (typing) => {
+        let names = []
+
+        // Add the names of other typing clients to the array above.
+        typing.forEach((client) => {
+            if (client[1] != socket.id) {
+                names.push(client[0])
             }
+        })
+
+        if (names.length == 0) {
+            // Empty the typing indicator.
+            $("#typing").innerText = ""
+        } else if (names.length == 1) {
+            // Fill the typing indicator with text.
+            $("#typing").innerText = `${names[0]} is typing...`
+        } else {
+            // Fill the typing indicator with text.
+            $("#typing").innerText = `${names.slice(0, -1).join(", ")} and ${names.slice(-1)} are typing...`
         }
     })
 
@@ -223,7 +232,6 @@ if ($("#trivia")) {
         socket.emit("message", {
             message: $("#chat input").value,
             name: $("h1").textContent,
-            id: socket.id,
             time: time
         })
 

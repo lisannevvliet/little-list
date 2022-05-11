@@ -32,6 +32,7 @@ app.use(express.urlencoded({
 let trivia
 let answers = []
 let clients = []
+let typing = []
 
 let name = ""
 let category = "any"
@@ -115,6 +116,16 @@ io.on("connection", (socket) => {
 
         // Emit the names of clients who have not answered yet.
         io.emit("waiting", waiting)
+
+        // Remove the name and connection ID from the list of typing clients.
+        typing.forEach((client, index) => {
+            if (client[1] == socket.id) {
+                typing.splice(index, 1)
+            }
+        })
+    
+        // Emit the array of typing clients.
+        io.emit("typing", typing)
 
         if (answers.length == clients.length) {
             // Get the trivia from the API.
@@ -284,19 +295,37 @@ io.on("connection", (socket) => {
             })
     })
 
-    socket.on("typing", (client) => {
-        io.emit("typing", {
-            name: client.name,
-            id: client.id,
-            typing: client.typing
+    socket.on("typing", (client) => {        
+        let exists = false
+        
+        // Check if the client is already in the array.
+        typing.forEach((client) => {
+            if (client[1] == socket.id) {
+                exists = true
+            }
         })
+
+        if (client.typing && !exists) {
+            // Add the name and connection ID to the list of typing clients.
+            typing.push([client.name, socket.id])
+        } else if (!client.typing) {
+            // Remove the name and connection ID from the list of typing clients.
+            typing.forEach((client, index) => {
+                if (client[1] == socket.id) {
+                    typing.splice(index, 1)
+                }
+            })
+        }
+        
+        // Emit the array of typing clients.
+        io.emit("typing", typing)
     })
 
     socket.on("message", (message) => {
         io.emit("message", {
             message: message.message,
             name: message.name,
-            id: message.id,
+            id: socket.id,
             time: message.time
         })
     })
