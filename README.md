@@ -8,7 +8,7 @@
   - [License](#license)
 
 ## Live demo
-https://little-list-sy2f.onrender.com
+https://little-list-rtw.onrender.com
 
 ## Installation
 Clone deze repository naar jouw lokale folder:
